@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Threls\ThrelsInvoicingModule\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ThrelsInvoicingModuleCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'invoicing-module';
 
     public $description = 'My command';
 
