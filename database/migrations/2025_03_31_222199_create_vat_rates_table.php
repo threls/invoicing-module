@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('vat_rates', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('rate')->unique();;
+            $table->bigInteger('rate')->unique();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
         });

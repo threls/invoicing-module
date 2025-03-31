@@ -25,5 +25,4 @@ class TransactionItem extends Model
     {
         return $this->belongsTo(VatRate::class, 'vat_id');
     }
-
 }

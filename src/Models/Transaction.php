@@ -12,8 +12,8 @@ use Threls\ThrelsInvoicingModule\Enums\TransactionTypeEnum;
 
 class Transaction extends Model
 {
-    use SoftDeletes;
     use HasStatuses;
+    use SoftDeletes;
 
     protected $guarded = ['id'];
 
@@ -43,5 +43,4 @@ class Transaction extends Model
     {
         return $this->hasOne(CreditNote::class);
     }
-
 }

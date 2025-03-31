@@ -7,7 +7,6 @@ use Threls\ThrelsInvoicingModule\Models\VatRate;
 
 class VatRatesSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      */

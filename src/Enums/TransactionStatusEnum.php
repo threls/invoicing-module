@@ -12,7 +12,6 @@ enum TransactionStatusEnum: string
     case FAILED = 'failed';
     case SUPERSEDED = 'superseded';
 
-
     public function allowedTransitions(): array
     {
         return match ($this) {

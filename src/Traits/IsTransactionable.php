@@ -7,7 +7,6 @@ use Threls\ThrelsInvoicingModule\Models\TransactionItem;
 
 trait IsTransactionable
 {
-
     public function transactionItems(): MorphMany
     {
         return $this->morphMany(TransactionItem::class, 'model');
