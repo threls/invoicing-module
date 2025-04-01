@@ -20,8 +20,5 @@ class CreateTransactionDto extends Data
         public readonly string $currency,
         public readonly int $vatAmount,
         public readonly Collection $items,
-    )
-    {
-    }
-
+    ) {}
 }

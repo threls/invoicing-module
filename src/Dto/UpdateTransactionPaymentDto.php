@@ -13,8 +13,5 @@ class UpdateTransactionPaymentDto extends Data
         public int $transactionId,
         public int $paymentId,
         public string $paymentType
-    )
-    {
-    }
-
+    ) {}
 }

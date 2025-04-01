@@ -15,11 +15,10 @@ class UpdateTransactionStatusAction
         $transaction = Transaction::find($updateTransactionStatusDto->transactionId);
 
         /** @phpstan-ignore-next-line */
-        if (! TransactionStatusEnum::from($transaction->status)->canTransitionTo($updateTransactionStatusDto->status)){
+        if (! TransactionStatusEnum::from($transaction->status)->canTransitionTo($updateTransactionStatusDto->status)) {
             throw new BadRequestHttpException('Transaction status cannot be transitioned to '.$updateTransactionStatusDto->status->value);
         }
         $transaction->setStatus($updateTransactionStatusDto->status->value);
 
     }
-
 }

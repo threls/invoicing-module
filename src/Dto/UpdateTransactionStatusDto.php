@@ -13,8 +13,5 @@ class UpdateTransactionStatusDto extends Data
     public function __construct(
         public int $transactionId,
         public TransactionStatusEnum $status,
-    )
-    {
-    }
-
+    ) {}
 }

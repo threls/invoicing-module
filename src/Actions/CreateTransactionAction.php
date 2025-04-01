@@ -9,6 +9,7 @@ use Threls\ThrelsInvoicingModule\Models\Transaction;
 class CreateTransactionAction
 {
     protected CreateTransactionDto $createTransactionDto;
+
     protected Transaction $transaction;
 
     public function execute(CreateTransactionDto $createTransactionDto): Transaction
@@ -24,7 +25,7 @@ class CreateTransactionAction
 
     protected function createTransaction(): self
     {
-       $this->transaction = Transaction::create([
+        $this->transaction = Transaction::create([
             'user_id' => $this->createTransactionDto->userId,
             'amount' => $this->createTransactionDto->amount,
             'currency' => $this->createTransactionDto->currency,
@@ -32,9 +33,9 @@ class CreateTransactionAction
             'type' => $this->createTransactionDto->type,
         ]);
 
-       $this->transaction->setStatus($this->createTransactionDto->status->value);
+        $this->transaction->setStatus($this->createTransactionDto->status->value);
 
-       return $this;
+        return $this;
 
     }
 

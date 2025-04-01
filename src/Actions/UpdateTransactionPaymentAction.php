@@ -14,7 +14,5 @@ class UpdateTransactionPaymentAction
             'payment_type' => $updateTransactionPaymentDto->paymentType,
         ]);
 
-
     }
-
 }

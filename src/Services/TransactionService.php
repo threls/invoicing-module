@@ -19,12 +19,11 @@ class TransactionService
 
     public function updateTransactionPayment(UpdateTransactionPaymentDto $updateTransactionPaymentDto): void
     {
-       app(UpdateTransactionPaymentAction::class)->execute($updateTransactionPaymentDto);
+        app(UpdateTransactionPaymentAction::class)->execute($updateTransactionPaymentDto);
     }
 
     public function updateTransactionStatus(UpdateTransactionStatusDto $updateTransactionStatusDto): void
     {
         app(UpdateTransactionStatusAction::class)->execute($updateTransactionStatusDto);
     }
-
 }
