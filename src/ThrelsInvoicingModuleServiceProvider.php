@@ -6,7 +6,7 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\ModelStatus\ModelStatusServiceProvider;
 use Threls\ThrelsInvoicingModule\Commands\ThrelsInvoicingModuleCommand;
-use Threls\ThrelsInvoicingModule\Services\TransactionService;
+use Threls\ThrelsInvoicingModule\Services\InvoicingSystemService;
 
 class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
 {
@@ -25,8 +25,8 @@ class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
             ->hasCommand(ThrelsInvoicingModuleCommand::class)
             ->publishesServiceProvider(ModelStatusServiceProvider::class);
 
-        $this->app->singleton(TransactionService::class, function ($app) {
-            return new TransactionService;
+        $this->app->singleton(InvoicingSystemService::class, function ($app) {
+            return new InvoicingSystemService;
         });
     }
 }

@@ -5,20 +5,23 @@ namespace Threls\ThrelsInvoicingModule\Services;
 use Threls\ThrelsInvoicingModule\Actions\CreateCreditNoteAction;
 use Threls\ThrelsInvoicingModule\Actions\CreateInvoiceAction;
 use Threls\ThrelsInvoicingModule\Actions\CreateTransactionAction;
+use Threls\ThrelsInvoicingModule\Actions\CreateVatRateAction;
 use Threls\ThrelsInvoicingModule\Actions\LinkTransactionWithPaymentAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateCreditNoteStatusAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateTransactionStatusAction;
 use Threls\ThrelsInvoicingModule\Dto\CreateCreditNoteDto;
 use Threls\ThrelsInvoicingModule\Dto\CreateInvoiceDto;
 use Threls\ThrelsInvoicingModule\Dto\CreateTransactionDto;
+use Threls\ThrelsInvoicingModule\Dto\CreateVatRateDto;
 use Threls\ThrelsInvoicingModule\Dto\LinkTransactionWithPaymentDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateCreditNoteStatusDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateTransactionStatusDto;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\Transaction;
+use Threls\ThrelsInvoicingModule\Models\VatRate;
 
-class TransactionService
+class InvoicingSystemService
 {
     public function createTransaction(CreateTransactionDto $createTransactionDto): Transaction
     {
@@ -49,6 +52,10 @@ class TransactionService
     public function updateCreditNoteStatus(UpdateCreditNoteStatusDto $updateCreditNoteStatusDto): void
     {
         app(UpdateCreditNoteStatusAction::class)->execute($updateCreditNoteStatusDto);
+    }
 
+    public function createVatRate(CreateVatRateDto $createVatRateDto): VatRate
+    {
+        return app(CreateVatRateAction::class)->execute($createVatRateDto);
     }
 }
