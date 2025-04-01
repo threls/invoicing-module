@@ -21,5 +21,4 @@ class UpdateCreditNoteStatusAction
         $creditNote->setStatus($updateCreditNoteStatusDto->status->value, $updateCreditNoteStatusDto->reason);
 
     }
-
 }

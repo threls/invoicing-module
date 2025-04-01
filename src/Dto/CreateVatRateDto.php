@@ -11,8 +11,5 @@ class CreateVatRateDto extends Data
 {
     public function __construct(
         public readonly int $rate
-    )
-    {
-    }
-
+    ) {}
 }

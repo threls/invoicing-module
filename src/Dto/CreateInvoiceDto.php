@@ -14,8 +14,5 @@ class CreateInvoiceDto extends Data
         public readonly int $vatAmount,
         public readonly int $totalAmount,
         public readonly string $currency,
-    )
-    {
-    }
-
+    ) {}
 }

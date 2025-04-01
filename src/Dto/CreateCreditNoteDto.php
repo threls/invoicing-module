@@ -17,8 +17,5 @@ class CreateCreditNoteDto extends Data
         public readonly ?string $reason,
         public readonly CreditNoteStatusEnum $status,
         public readonly ?string $statusReason = null,
-    )
-    {
-    }
-
+    ) {}
 }

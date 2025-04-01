@@ -14,8 +14,5 @@ class UpdateCreditNoteStatusDto extends Data
         public int $creditNoteId,
         public CreditNoteStatusEnum $status,
         public ?string $reason = null,
-    )
-    {
-    }
-
+    ) {}
 }

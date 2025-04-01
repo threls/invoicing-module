@@ -9,10 +9,9 @@ class CreateVatRateAction
 {
     public function execute(CreateVatRateDto $createVatRateDto): VatRate
     {
-       return VatRate::updateOrCreate([
+        return VatRate::updateOrCreate([
             'rate' => $createVatRateDto->rate,
         ]);
 
     }
-
 }
