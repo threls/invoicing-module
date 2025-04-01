@@ -18,7 +18,7 @@ class UpdateTransactionStatusAction
         if (! TransactionStatusEnum::from($transaction->status)->canTransitionTo($updateTransactionStatusDto->status)) {
             throw new BadRequestHttpException('Transaction status cannot be transitioned to '.$updateTransactionStatusDto->status->value);
         }
-        $transaction->setStatus($updateTransactionStatusDto->status->value);
+        $transaction->setStatus($updateTransactionStatusDto->status->value, $updateTransactionStatusDto->reason);
 
     }
 }

@@ -5,6 +5,8 @@ namespace Threls\ThrelsInvoicingModule\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\ModelStatus\HasStatuses;
@@ -29,11 +31,6 @@ class Transaction extends Model
         return $this->hasMany(TransactionItem::class);
     }
 
-    public function payment(): MorphTo
-    {
-        return $this->morphTo();
-    }
-
     public function invoice(): HasOne
     {
         return $this->hasOne(Invoice::class);
@@ -42,5 +39,10 @@ class Transaction extends Model
     public function creditNote(): HasOne
     {
         return $this->hasOne(CreditNote::class);
+    }
+
+    public function payment(): MorphOne
+    {
+        return $this->morphOne(TransactionPayment::class, 'paymentable');
     }
 }

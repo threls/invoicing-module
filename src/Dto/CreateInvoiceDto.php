@@ -5,14 +5,17 @@ namespace Threls\ThrelsInvoicingModule\Dto;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
-use Threls\ThrelsInvoicingModule\Enums\TransactionStatusEnum;
 
 #[MapName(SnakeCaseMapper::class)]
-class UpdateTransactionStatusDto extends Data
+class CreateInvoiceDto extends Data
 {
     public function __construct(
-        public int $transactionId,
-        public TransactionStatusEnum $status,
-        public ?string $reason = null,
-    ) {}
+        public readonly int $transactionId,
+        public readonly int $vatAmount,
+        public readonly int $totalAmount,
+        public readonly string $currency,
+    )
+    {
+    }
+
 }
