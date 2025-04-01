@@ -24,5 +24,4 @@ class CreateCreditNoteAction
 
         return $creditNote;
     }
-
 }

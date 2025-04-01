@@ -18,5 +18,4 @@ class CreateInvoiceAction
             'currency' => $createInvoiceDto->currency,
         ]);
     }
-
 }

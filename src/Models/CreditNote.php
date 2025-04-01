@@ -9,8 +9,8 @@ use Spatie\ModelStatus\HasStatuses;
 
 class CreditNote extends Model
 {
-    use SoftDeletes;
     use HasStatuses;
+    use SoftDeletes;
 
     public function transaction(): BelongsTo
     {

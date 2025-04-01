@@ -1,6 +1,7 @@
 <?php
 
 namespace Threls\ThrelsInvoicingModule\Enums;
+
 enum CreditNoteStatusEnum: string
 {
     case PENDING = 'pending';
