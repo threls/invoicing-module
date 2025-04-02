@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('transaction_id')->constrained();
             $table->bigInteger('amount');
             $table->string('currency');
-            $table->string('reason');
+            $table->string('reason')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->timestamp('deleted_at');

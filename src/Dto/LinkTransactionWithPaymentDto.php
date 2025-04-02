@@ -7,11 +7,11 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class UpdateTransactionPaymentDto extends Data
+class LinkTransactionWithPaymentDto extends Data
 {
     public function __construct(
         public int $transactionId,
-        public int $paymentId,
-        public string $paymentType
+        public int $paymentableId,
+        public string $paymentableType
     ) {}
 }

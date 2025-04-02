@@ -47,6 +47,7 @@ class CreateTransactionAction
                 [
                     'model_id' => $createTransactionItemDto->modelId,
                     'model_type' => $createTransactionItemDto->modelType,
+                    'description' => $createTransactionItemDto->description,
                     'qty' => $createTransactionItemDto->qty,
                     'amount' => $createTransactionItemDto->amount,
                     'currency' => $createTransactionItemDto->currency,
