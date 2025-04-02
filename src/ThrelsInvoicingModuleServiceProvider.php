@@ -20,8 +20,16 @@ class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
             ->name('invoicing-module')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_invoicing_module_table')
+            ->hasMigrations([
+                'create_vat_rates_table',
+                'create_transactions_table',
+                'create_transaction_items_table',
+                'create_invoices_table',
+                'create_credit_notes_table',
+                'create_transaction_payments_table',
+            ])
             ->hasCommand(ThrelsInvoicingModuleCommand::class)
             ->publishesServiceProvider(ModelStatusServiceProvider::class);
+
     }
 }

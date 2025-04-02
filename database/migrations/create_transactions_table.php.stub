@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->string('payment_type');
-            $table->bigInteger('payment_id');
             $table->bigInteger('amount');
             $table->string('currency');
             $table->string('type');
