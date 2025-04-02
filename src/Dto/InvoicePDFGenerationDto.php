@@ -9,14 +9,11 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 #[MapName(SnakeCaseMapper::class)]
 class InvoicePDFGenerationDto extends Data
 {
-
     public function __construct(
         public ?string $name,
         public ?string $customerName,
         public ?string $customerAddress,
         public ?string $customerPhone,
         public ?string $customerEmail,
-    )
-    {
-    }
+    ) {}
 }

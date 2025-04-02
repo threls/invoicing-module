@@ -11,8 +11,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
-use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use LaravelDaily\Invoices\Invoice as PDFInvoice;
+use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
 
@@ -21,9 +21,11 @@ class InvoicePDFGenerationJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected Invoice $invoice;
+
     protected InvoicePDFGenerationDto $invoicePDFGenerationData;
 
     protected Party $seller;
+
     protected Party $customer;
 
     protected array $invoiceItems;
@@ -48,12 +50,12 @@ class InvoicePDFGenerationJob implements ShouldQueue
     protected function setSeller()
     {
         $this->seller = new Party([
-            'name'          => config('invoicing-module.seller.attributes.name'),
-            'address'       => config('invoicing-module.seller.attributes.address'),
+            'name' => config('invoicing-module.seller.attributes.name'),
+            'address' => config('invoicing-module.seller.attributes.address'),
             'email' => config('invoicing-module.seller.attributes.email'),
-            'phone' =>  config('invoicing-module.seller.attributes.phone'),
-            'vat_nr' =>  config('invoicing-module.seller.attributes.vat_nr'),
-            'exo_nr' =>  config('invoicing-module.seller.attributes.exo_nr'),
+            'phone' => config('invoicing-module.seller.attributes.phone'),
+            'vat_nr' => config('invoicing-module.seller.attributes.vat_nr'),
+            'exo_nr' => config('invoicing-module.seller.attributes.exo_nr'),
         ]);
 
         return $this;
@@ -63,8 +65,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
     protected function setCustomer()
     {
         $this->customer = new Party([
-            'name'          => $this->invoicePDFGenerationData->customerName ?? 'Cash Sale',
-            'address'       => $this->invoicePDFGenerationData->customerAddress,
+            'name' => $this->invoicePDFGenerationData->customerName ?? 'Cash Sale',
+            'address' => $this->invoicePDFGenerationData->customerAddress,
             'email' => $this->invoicePDFGenerationData->customerEmail,
             'phone' => $this->invoicePDFGenerationData->customerPhone,
         ]);
@@ -80,9 +82,9 @@ class InvoicePDFGenerationJob implements ShouldQueue
         $invoiceItems = [];
         $items->each(function (TransactionItem $transactionItem) use (&$invoiceItems) {
             $invoiceItems[] = InvoiceItem::make($transactionItem->description)
-                ->pricePerUnit($transactionItem->amount->getMinorAmount()->toFloat()/100)
+                ->pricePerUnit($transactionItem->amount->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
-                ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat()/100);
+                ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100);
         });
 
         $this->invoiceItems = $invoiceItems;
@@ -108,7 +110,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->currencyDecimalPoint(config('invoicing-module.currency.decimal_point'))
             ->logo(config('invoicing-module.seller.attributes.logo'))
             ->save(config('invoicing-module.disk'));
-            //->template()
+        // ->template()
 
         return $invoice;
 

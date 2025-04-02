@@ -9,7 +9,9 @@ use Threls\ThrelsInvoicingModule\Models\Transaction;
 class CreateInvoiceAction
 {
     protected Transaction $transaction;
+
     protected Invoice $invoice;
+
     protected CreateInvoiceDto $createInvoiceDto;
 
     public function execute(Transaction $transaction, CreateInvoiceDto $createInvoiceDto)
@@ -24,13 +26,13 @@ class CreateInvoiceAction
 
     protected function createInvoice()
     {
-       $this->invoice = $this->transaction->invoice()->create([
+        $this->invoice = $this->transaction->invoice()->create([
             'vat_amount' => $this->createInvoiceDto->vatAmount,
-            'total_amount' =>  $this->createInvoiceDto->totalAmount,
-            'currency' =>  $this->createInvoiceDto->currency,
+            'total_amount' => $this->createInvoiceDto->totalAmount,
+            'currency' => $this->createInvoiceDto->currency,
         ]);
 
-       return $this;
+        return $this;
 
     }
 }

@@ -23,7 +23,7 @@ class Transaction extends Model
 
     protected $guarded = ['id'];
 
-    public Money|null $amount;
+    public ?Money $amount;
 
     protected function casts(): array
     {

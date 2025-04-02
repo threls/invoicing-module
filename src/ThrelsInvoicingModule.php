@@ -23,8 +23,8 @@ use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\Transaction;
 use Threls\ThrelsInvoicingModule\Models\VatRate;
 
-class ThrelsInvoicingModule {
-
+class ThrelsInvoicingModule
+{
     public function createTransaction(CreateTransactionDto $createTransactionDto): Transaction
     {
         return app(CreateTransactionAction::class)->execute($createTransactionDto);
@@ -63,8 +63,7 @@ class ThrelsInvoicingModule {
 
     public function generateInvoicePdf(Invoice $invoice, InvoicePDFGenerationDto $invoicePdfGenerationDto): void
     {
-        app(GenerateInvoicePdfAction::class)->execute($invoice,$invoicePdfGenerationDto);
+        app(GenerateInvoicePdfAction::class)->execute($invoice, $invoicePdfGenerationDto);
 
     }
-
 }

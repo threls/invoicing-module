@@ -23,6 +23,7 @@ class Invoice extends Model
             'total_amount' => MoneyCast::class,
         ];
     }
+
     public function transaction(): BelongsTo
     {
         return $this->belongsTo(Transaction::class);

@@ -6,7 +6,6 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\ModelStatus\ModelStatusServiceProvider;
 use Threls\ThrelsInvoicingModule\Commands\ThrelsInvoicingModuleCommand;
-use Threls\ThrelsInvoicingModule\Services\InvoicingSystemService;
 
 class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
 {

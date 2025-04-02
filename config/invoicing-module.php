@@ -8,14 +8,14 @@ return [
     'logo' => '',
 
     'serial_number' => [
-        'series'   => 'AA',
+        'series' => 'AA',
         'sequence' => 1,
 
         /*
          * Sequence will be padded accordingly, for ex. 00001
          */
         'sequence_padding' => 5,
-        'delimiter'        => '-',
+        'delimiter' => '-',
 
         /*
          * Supported tags {SERIES}, {DELIMITER}, {SEQUENCE}
@@ -34,7 +34,7 @@ return [
          * Example: Amount in words: Eight hundred fifty thousand sixty-eight EUR and fifteen ct.
          */
         'fraction' => 'ct.',
-        'symbol'   => '€',
+        'symbol' => '€',
 
         /*
          * Example: 19.00
@@ -60,7 +60,7 @@ return [
     ],
 
     'paper' => [
-        'size'        => 'a4',
+        'size' => 'a4',
         'orientation' => 'portrait',
     ],
 
@@ -69,12 +69,12 @@ return [
     'seller' => [
 
         'attributes' => [
-            'name'          => 'Threls',
-            'address'       => '89982 Pfeffer Falls Damianstad, CO 66972-8160',
-            'email'       => 'test@gmail.com',
-            'vat_nr'           => '123456789',
-            'exo_nr'           => '12345678444',
-            'phone'         => '760-355-3930',
+            'name' => 'Threls',
+            'address' => '89982 Pfeffer Falls Damianstad, CO 66972-8160',
+            'email' => 'test@gmail.com',
+            'vat_nr' => '123456789',
+            'exo_nr' => '12345678444',
+            'phone' => '760-355-3930',
             'custom_fields' => [
                 'SWIFT' => 'BANK101',
             ],

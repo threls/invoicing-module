@@ -13,5 +13,4 @@ class GenerateInvoicePDFAction
         InvoicePDFGenerationJob::dispatch($invoice, $invoicePDFGenerationData);
 
     }
-
 }

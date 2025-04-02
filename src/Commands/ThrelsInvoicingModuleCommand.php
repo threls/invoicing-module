@@ -42,7 +42,7 @@ class ThrelsInvoicingModuleCommand extends Command
                 vatAmount: 40,
                 currency: 'EUR',
                 vatId: 1
-            )
+            ),
         ];
 
         $dto = new CreateTransactionDto(
@@ -66,11 +66,11 @@ class ThrelsInvoicingModuleCommand extends Command
         $invoice = ThrelsInvoicingModule::createInvoice($transaction, $invoiceDto);
 
         $pdfDto = new InvoicePDFGenerationDto(
-            name: "Invoice 1",
-            customerName: "Customer 1",
-            customerAddress: "Customer Address 1",
-            customerPhone: "+355692222332",
-            customerEmail: "sabina@threls.com",
+            name: 'Invoice 1',
+            customerName: 'Customer 1',
+            customerAddress: 'Customer Address 1',
+            customerPhone: '+355692222332',
+            customerEmail: 'sabina@threls.com',
         );
 
         ThrelsInvoicingModule::generateInvoicePdf($invoice, $pdfDto);
