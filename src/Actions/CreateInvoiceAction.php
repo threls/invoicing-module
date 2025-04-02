@@ -23,7 +23,7 @@ class CreateInvoiceAction
 
         return $this->invoice;
     }
-  
+
     protected function createInvoice()
     {
         $this->invoice = $this->transaction->invoice()->create([
