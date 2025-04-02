@@ -10,7 +10,6 @@ use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 class CreateInvoiceDto extends Data
 {
     public function __construct(
-        public readonly int $transactionId,
         public readonly int $vatAmount,
         public readonly int $totalAmount,
         public readonly string $currency,
