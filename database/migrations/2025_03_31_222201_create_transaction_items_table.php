@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('transaction_id')->constrained();
             $table->string('model_type');
             $table->bigInteger('model_id');
+            $table->string('description');
             $table->bigInteger('qty');
             $table->bigInteger('amount');
             $table->bigInteger('total_amount');

@@ -7,11 +7,9 @@ use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
 #[MapName(SnakeCaseMapper::class)]
-class CreateInvoiceDto extends Data
+class CreateVatRateDto extends Data
 {
     public function __construct(
-        public readonly int $vatAmount,
-        public readonly int $totalAmount,
-        public readonly string $currency,
+        public readonly int $rate
     ) {}
 }
