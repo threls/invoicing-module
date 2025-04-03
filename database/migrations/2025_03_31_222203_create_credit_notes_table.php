@@ -17,9 +17,8 @@ return new class extends Migration
             $table->bigInteger('amount');
             $table->string('currency');
             $table->string('reason')->nullable();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-            $table->timestamp('deleted_at');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
