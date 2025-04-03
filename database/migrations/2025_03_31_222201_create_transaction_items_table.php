@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('total_amount');
             $table->bigInteger('vat_amount');
             $table->string('currency');
-            $table->foreignId('vat_id')->constrained();
+            $table->foreignId('vat_id')->constrained('vat_rates');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->timestamp('deleted_at');

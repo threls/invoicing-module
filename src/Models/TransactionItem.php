@@ -18,6 +18,8 @@ class TransactionItem extends Model
 {
     use SoftDeletes;
 
+    protected $guarded = ['id'];
+
     protected function casts(): array
     {
         return [

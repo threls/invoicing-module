@@ -16,6 +16,7 @@ class Invoice extends Model
 {
     use SoftDeletes;
 
+    protected $guarded = ['id'];
     protected function casts(): array
     {
         return [
