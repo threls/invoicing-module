@@ -27,8 +27,7 @@ class ThrelsInvoicingModuleCommand extends Command
                 description: 'Test transaction item 1',
                 qty: 1,
                 amount: 100,
-                totalAmount: 100,
-                vatAmount: 20,
+                totalAmount: 120,
                 currency: 'EUR',
                 vatId: 1
             ),
@@ -38,8 +37,7 @@ class ThrelsInvoicingModuleCommand extends Command
                 description: 'Test transaction item 2',
                 qty: 1,
                 amount: 200,
-                totalAmount: 200,
-                vatAmount: 40,
+                totalAmount: 240,
                 currency: 'EUR',
                 vatId: 1
             ),
@@ -51,7 +49,6 @@ class ThrelsInvoicingModuleCommand extends Command
             status: TransactionStatusEnum::PENDING,
             amount: 1000,
             currency: 'EUR',
-            vatAmount: 200,
             items: collect($items),
         );
 

@@ -30,6 +30,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected array $invoiceItems;
 
+    protected PDFInvoice $invoicePDF;
+
     public function __construct(Invoice $invoice, InvoicePDFGenerationDto $invoicePDFGenerationData)
     {
         $this->invoice = $invoice;
@@ -43,7 +45,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->setSeller()
             ->setCustomer()
             ->setItems()
-            ->createInvoice();
+            ->createInvoice()
+            ->addMediaToDisk();
 
     }
 
@@ -81,8 +84,11 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
         $invoiceItems = [];
         $items->each(function (TransactionItem $transactionItem) use (&$invoiceItems) {
+
+            $priceWithoutVat = $transactionItem->total_amount->minus($transactionItem->vat_amount);
+
             $invoiceItems[] = InvoiceItem::make($transactionItem->description)
-                ->pricePerUnit($transactionItem->amount->getMinorAmount()->toFloat() / 100)
+                ->pricePerUnit($priceWithoutVat->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
                 ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100);
         });
@@ -94,9 +100,11 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected function createInvoice()
     {
-        $invoice = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
-            ->series('')
+        $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
+            ->series(config('invoicing-module.serial_number.series'))
             ->sequence($this->invoice->id)
+            ->sequencePadding(config('invoicing-module.serial_number.sequence_padding'))
+            ->delimiter(config('invoicing-module.serial_number.delimiter'))
             ->serialNumberFormat(config('invoicing-module.serial_number.format'))
             ->seller($this->seller)
             ->buyer($this->customer)
@@ -105,14 +113,22 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->addItems($this->invoiceItems)
             ->currencySymbol(config('invoicing-module.currency.symbol'))
             ->currencyCode(config('invoicing-module.currency.code'))
+            ->currencyDecimals(config('invoicing-module.currency.decimal'))
+            ->currencyDecimalPoint(config('invoicing-module.currency.decimal_point'))
             ->currencyFormat(config('invoicing-module.currency.format'))
             ->currencyThousandsSeparator(config('invoicing-module.currency.thousands_separator'))
-            ->currencyDecimalPoint(config('invoicing-module.currency.decimal_point'))
-            ->logo(config('invoicing-module.logo'))
-            ->save(config('invoicing-module.disk'));
-        // ->template()
+            ->totalAmount($this->invoice->total_amount->getMinorAmount()->toFloat() / 100)
+            ->template('template-1');
 
-        return $invoice;
+
+        $this->invoicePDF = $invoicePDF;
+
+        return $this;
+    }
+
+    protected function addMediaToDisk(): void
+    {
+        $this->invoice->addMediaFromStream($this->invoicePDF->stream())->toMediaCollection(Invoice::MEDIA_INVOICE);
 
     }
 }

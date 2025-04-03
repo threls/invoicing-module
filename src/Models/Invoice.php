@@ -6,17 +6,21 @@ use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
 
 /**
  * @property Money|null $total_amount
  * @property Money|null $vat_amount
  */
-class Invoice extends Model
+class Invoice extends Model implements HasMedia
 {
-    use SoftDeletes;
+    use SoftDeletes, InteractsWithMedia;
 
     protected $guarded = ['id'];
+
+    public const string MEDIA_INVOICE = 'invoice';
 
     protected function casts(): array
     {
@@ -29,5 +33,10 @@ class Invoice extends Model
     public function transaction(): BelongsTo
     {
         return $this->belongsTo(Transaction::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(self::MEDIA_INVOICE)->singleFile();
     }
 }

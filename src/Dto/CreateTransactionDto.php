@@ -18,7 +18,6 @@ class CreateTransactionDto extends Data
         public readonly TransactionStatusEnum $status,
         public readonly int $amount,
         public readonly string $currency,
-        public readonly int $vatAmount,
         public readonly Collection $items,
     ) {}
 }
