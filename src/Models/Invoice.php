@@ -16,7 +16,7 @@ use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
  */
 class Invoice extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia;
+    use InteractsWithMedia, SoftDeletes;
 
     protected $guarded = ['id'];
 

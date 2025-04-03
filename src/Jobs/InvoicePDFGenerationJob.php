@@ -120,7 +120,6 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->totalAmount($this->invoice->total_amount->getMinorAmount()->toFloat() / 100)
             ->template('template-1');
 
-
         $this->invoicePDF = $invoicePDF;
 
         return $this;

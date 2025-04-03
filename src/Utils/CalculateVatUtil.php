@@ -8,5 +8,4 @@ class CalculateVatUtil
     {
         return (int) round($totalPrice * $vatRate / (100 + $vatRate));
     }
-
 }

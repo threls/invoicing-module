@@ -14,9 +14,7 @@ class CreateTransactionAction
 
     protected Transaction $transaction;
 
-    public function __construct(protected readonly CalculateVatUtil $calculateVatUtil)
-    {
-    }
+    public function __construct(protected readonly CalculateVatUtil $calculateVatUtil) {}
 
     public function execute(CreateTransactionDto $createTransactionDto): Transaction
     {
@@ -73,6 +71,6 @@ class CreateTransactionAction
     protected function updateTransactionVat()
     {
         $totalVat = $this->transaction->transactionItems()->sum('vat_amount');
-        $this->transaction->update(['vat_amount' => $totalVat ]);
+        $this->transaction->update(['vat_amount' => $totalVat]);
     }
 }

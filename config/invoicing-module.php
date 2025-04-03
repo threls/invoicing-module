@@ -62,7 +62,7 @@ return [
             'exo_nr' => '12345678444',
             'phone' => '760-355-3930',
             'custom_fields' => [
-               // 'SWIFT' => 'BANK101',
+                // 'SWIFT' => 'BANK101',
             ],
         ],
     ],
