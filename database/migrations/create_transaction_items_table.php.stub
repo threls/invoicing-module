@@ -16,15 +16,15 @@ return new class extends Migration
             $table->foreignId('transaction_id')->constrained();
             $table->string('model_type');
             $table->bigInteger('model_id');
+            $table->string('description');
             $table->bigInteger('qty');
             $table->bigInteger('amount');
             $table->bigInteger('total_amount');
             $table->bigInteger('vat_amount');
             $table->string('currency');
-            $table->foreignId('vat_id')->constrained();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-            $table->timestamp('deleted_at');
+            $table->foreignId('vat_id')->constrained('vat_rates');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
