@@ -16,7 +16,6 @@ class CreateTransactionItemDto extends Data
         public readonly int $qty,
         public readonly int $amount,
         public readonly int $totalAmount,
-        public readonly int $vatAmount,
         public readonly string $currency,
         public readonly int $vatId,
     ) {}
