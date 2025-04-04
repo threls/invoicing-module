@@ -70,7 +70,7 @@ class CreateTransactionAction
 
     protected function updateTransactionVat()
     {
-        $totalVat = $this->transaction->transactionItems()->sum('vat_amount');
+        $totalVat = (int) $this->transaction->transactionItems()->sum('vat_amount');
         $this->transaction->update(['vat_amount' => $totalVat]);
     }
 }

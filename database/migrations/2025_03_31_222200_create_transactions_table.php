@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('amount');
             $table->string('currency');
             $table->string('type');
-            $table->bigInteger('vat_amount');
+            $table->bigInteger('vat_amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
