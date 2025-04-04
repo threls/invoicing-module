@@ -113,7 +113,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->addItems($this->invoiceItems)
             ->currencySymbol(config('invoicing-module.currency.symbol'))
             ->currencyCode(config('invoicing-module.currency.code'))
-            ->currencyDecimals(config('invoicing-module.currency.decimal'))
+            ->currencyDecimals(config('invoicing-module.currency.decimals'))
             ->currencyDecimalPoint(config('invoicing-module.currency.decimal_point'))
             ->currencyFormat(config('invoicing-module.currency.format'))
             ->currencyThousandsSeparator(config('invoicing-module.currency.thousands_separator'))
