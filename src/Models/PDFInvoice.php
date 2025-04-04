@@ -16,8 +16,8 @@ class PDFInvoice extends \LaravelDaily\Invoices\Invoice
         $this->beforeRender();
 
         $template = sprintf('invoicing-module::templates.%s', $this->template);
-        $view     = View::make($template, ['invoice' => $this]);
-        $html     = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
+        $view = View::make($template, ['invoice' => $this]);
+        $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
 
         $this->pdf = PDF::setOptions($this->options)
             ->setPaper($this->paperOptions['size'], $this->paperOptions['orientation'])
@@ -33,5 +33,4 @@ class PDFInvoice extends \LaravelDaily\Invoices\Invoice
 
         return View::make($template, ['invoice' => $this]);
     }
-
 }
