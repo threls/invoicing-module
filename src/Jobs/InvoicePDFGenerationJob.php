@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
-use LaravelDaily\Invoices\Invoice as PDFInvoice;
+use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
