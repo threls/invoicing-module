@@ -127,7 +127,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected function addMediaToDisk(): void
     {
-        $this->invoice->addMediaFromStream($this->invoicePDF->stream())->toMediaCollection(Invoice::MEDIA_INVOICE);
+        $this->invoice->addMediaFromStream($this->invoicePDF->stream())->usingFileName($this->invoicePDF->filename)->toMediaCollection(Invoice::MEDIA_INVOICE);
 
     }
 }
