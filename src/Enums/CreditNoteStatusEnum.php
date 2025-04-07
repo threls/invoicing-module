@@ -8,13 +8,13 @@ enum CreditNoteStatusEnum: string
     case SUCCEEDED = 'succeeded';
     case FAILED = 'failed';
     case REQUIRES_ACTION = 'requires_action';
-    case CANCELED = 'canceled';
+    case CANCELLED = 'cancelled';
 
     public function allowedTransitions(): array
     {
         return match ($this) {
-            self::PENDING => [self::SUCCEEDED, self::FAILED, self::REQUIRES_ACTION, self::CANCELED],
-            self::REQUIRES_ACTION => [self::SUCCEEDED, self::FAILED, self::CANCELED, self::PENDING],
+            self::PENDING => [self::SUCCEEDED, self::FAILED, self::REQUIRES_ACTION, self::CANCELLED],
+            self::REQUIRES_ACTION => [self::SUCCEEDED, self::FAILED, self::CANCELLED, self::PENDING],
             default => [],
         };
     }

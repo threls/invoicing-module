@@ -3,7 +3,9 @@
 namespace Threls\ThrelsInvoicingModule\Actions;
 
 use LaravelDaily\Invoices\Traits\SerialNumberFormatter;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Threls\ThrelsInvoicingModule\Dto\CreateInvoiceDto;
+use Threls\ThrelsInvoicingModule\Enums\TransactionStatusEnum;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\Transaction;
 
@@ -22,9 +24,20 @@ class CreateInvoiceAction
         $this->transaction = $transaction;
         $this->createInvoiceDto = $createInvoiceDto;
 
-        $this->createInvoice();
+        $this->checkTransactionStatus()
+            ->createInvoice();
 
         return $this->invoice;
+    }
+
+    protected function checkTransactionStatus()
+    {
+        if (! $this->transaction->status != TransactionStatusEnum::PAID->value) {
+            throw new BadRequestHttpException('Transaction status is not paid.');
+        }
+
+        return $this;
+
     }
 
     protected function createInvoice()

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('credit_note_number')->unique()->nullable();
             $table->foreignId('invoice_id')->constrained();
-            $table->foreignId('transaction_id')->nullable()->constrained();
             $table->bigInteger('amount');
             $table->string('currency');
             $table->string('reason')->nullable();

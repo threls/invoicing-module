@@ -108,9 +108,7 @@ class ThrelsInvoicingModuleCommand extends Command
             items: collect($item),
         );
 
-        $creditNoteTransaction = ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
-
-        ThrelsInvoicingModule::setCreditNoteTransaction($creditNoteTransaction);
+        ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
 
         $creditNotePdfDto = new CreditNotePDFGenerationDto(
             name: 'CreditNote 1',

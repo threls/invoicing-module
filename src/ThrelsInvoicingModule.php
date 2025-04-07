@@ -9,7 +9,6 @@ use Threls\ThrelsInvoicingModule\Actions\CreateVatRateAction;
 use Threls\ThrelsInvoicingModule\Actions\GenerateCreditNotePDFAction;
 use Threls\ThrelsInvoicingModule\Actions\GenerateInvoicePDFAction;
 use Threls\ThrelsInvoicingModule\Actions\LinkTransactionWithPaymentAction;
-use Threls\ThrelsInvoicingModule\Actions\SetCreditNoteTransactionAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateCreditNoteStatusAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateTransactionStatusAction;
 use Threls\ThrelsInvoicingModule\Dto\CreateCreditNoteDto;
@@ -19,7 +18,6 @@ use Threls\ThrelsInvoicingModule\Dto\CreateVatRateDto;
 use Threls\ThrelsInvoicingModule\Dto\CreditNotePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Dto\LinkTransactionWithPaymentDto;
-use Threls\ThrelsInvoicingModule\Dto\SetCreditNoteTransactionDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateCreditNoteStatusDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateTransactionStatusDto;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
@@ -53,11 +51,6 @@ class ThrelsInvoicingModule
     public function createCreditNote(CreateCreditNoteDto $createCreditNoteDto): CreditNote
     {
         return app(CreateCreditNoteAction::class)->execute($createCreditNoteDto);
-    }
-
-    public function setCreditNoteTransaction(SetCreditNoteTransactionDto $setCreditNoteTransactionDto): void
-    {
-        app(SetCreditNoteTransactionAction::class)->execute($setCreditNoteTransactionDto);
     }
 
     public function updateCreditNoteStatus(UpdateCreditNoteStatusDto $updateCreditNoteStatusDto): void
