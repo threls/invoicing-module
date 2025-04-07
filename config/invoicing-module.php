@@ -8,14 +8,17 @@ return [
     'logo' => '',
 
     'serial_number' => [
-        'series' => 'AA',
-        'sequence' => 1,
+
+        /*
+         * ex. AA
+         */
+        'series' => '',
 
         /*
          *  ex. 00001
          */
-        'sequence_padding' => 5,
-        'delimiter' => '-',
+        'sequence_padding' => 0,
+        'delimiter' => '',
 
         /*
          * ex. AA-00001
