@@ -6,16 +6,20 @@ use Threls\ThrelsInvoicingModule\Actions\CreateCreditNoteAction;
 use Threls\ThrelsInvoicingModule\Actions\CreateInvoiceAction;
 use Threls\ThrelsInvoicingModule\Actions\CreateTransactionAction;
 use Threls\ThrelsInvoicingModule\Actions\CreateVatRateAction;
+use Threls\ThrelsInvoicingModule\Actions\GenerateCreditNotePDFAction;
 use Threls\ThrelsInvoicingModule\Actions\GenerateInvoicePDFAction;
 use Threls\ThrelsInvoicingModule\Actions\LinkTransactionWithPaymentAction;
+use Threls\ThrelsInvoicingModule\Actions\SetCreditNoteTransactionAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateCreditNoteStatusAction;
 use Threls\ThrelsInvoicingModule\Actions\UpdateTransactionStatusAction;
 use Threls\ThrelsInvoicingModule\Dto\CreateCreditNoteDto;
 use Threls\ThrelsInvoicingModule\Dto\CreateInvoiceDto;
 use Threls\ThrelsInvoicingModule\Dto\CreateTransactionDto;
 use Threls\ThrelsInvoicingModule\Dto\CreateVatRateDto;
+use Threls\ThrelsInvoicingModule\Dto\CreditNotePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Dto\LinkTransactionWithPaymentDto;
+use Threls\ThrelsInvoicingModule\Dto\SetCreditNoteTransactionDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateCreditNoteStatusDto;
 use Threls\ThrelsInvoicingModule\Dto\UpdateTransactionStatusDto;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
@@ -51,6 +55,11 @@ class ThrelsInvoicingModule
         return app(CreateCreditNoteAction::class)->execute($createCreditNoteDto);
     }
 
+    public function setCreditNoteTransaction(SetCreditNoteTransactionDto $setCreditNoteTransactionDto): void
+    {
+        app(SetCreditNoteTransactionAction::class)->execute($setCreditNoteTransactionDto);
+    }
+
     public function updateCreditNoteStatus(UpdateCreditNoteStatusDto $updateCreditNoteStatusDto): void
     {
         app(UpdateCreditNoteStatusAction::class)->execute($updateCreditNoteStatusDto);
@@ -66,4 +75,12 @@ class ThrelsInvoicingModule
         app(GenerateInvoicePdfAction::class)->execute($invoice, $invoicePdfGenerationDto);
 
     }
+
+    public function generateCreditNotePdf(CreditNote $creditNote, CreditNotePDFGenerationDto $creditNotePDFGenerationDto): void
+    {
+        app(GenerateCreditNotePDFAction::class)->execute($creditNote, $creditNotePDFGenerationDto);
+
+    }
+
+
 }

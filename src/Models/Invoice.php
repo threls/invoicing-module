@@ -5,6 +5,7 @@ namespace Threls\ThrelsInvoicingModule\Models;
 use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -38,5 +39,10 @@ class Invoice extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection(self::MEDIA_INVOICE)->singleFile();
+    }
+
+    public function creditNote(): HasOne
+    {
+        return $this->hasOne(CreditNote::class,'invoice_id','id');
     }
 }

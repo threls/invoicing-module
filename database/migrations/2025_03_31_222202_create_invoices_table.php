@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice_number')->unique()->nullable();
             $table->foreignId('transaction_id')->constrained();
             $table->bigInteger('vat_amount');
             $table->bigInteger('total_amount');

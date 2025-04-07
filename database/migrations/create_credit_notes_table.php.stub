@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('credit_notes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaction_id')->constrained();
+            $table->string('credit_note_number')->unique()->nullable();
+            $table->foreignId('invoice_id')->constrained();
+            $table->foreignId('transaction_id')->nullable()->constrained();
             $table->bigInteger('amount');
             $table->string('currency');
             $table->string('reason')->nullable();

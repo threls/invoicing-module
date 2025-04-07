@@ -11,7 +11,7 @@ use Threls\ThrelsInvoicingModule\Enums\CreditNoteStatusEnum;
 class CreateCreditNoteDto extends Data
 {
     public function __construct(
-        public readonly int $transactionId,
+        public readonly int $invoiceId,
         public readonly int $amount,
         public readonly string $currency,
         public readonly ?string $reason,
