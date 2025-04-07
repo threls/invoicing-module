@@ -43,6 +43,6 @@ class Invoice extends Model implements HasMedia
 
     public function creditNote(): HasOne
     {
-        return $this->hasOne(CreditNote::class,'invoice_id','id');
+        return $this->hasOne(CreditNote::class, 'invoice_id', 'id');
     }
 }

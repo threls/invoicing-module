@@ -76,8 +76,6 @@ class ThrelsInvoicingModuleCommand extends Command
 
         ThrelsInvoicingModule::generateInvoicePdf($invoice, $pdfDto);
 
-
-
         /* credit note */
 
         $creditNoteDto = new CreateCreditNoteDto(
@@ -87,7 +85,6 @@ class ThrelsInvoicingModuleCommand extends Command
             reason: 'Refund requested',
             status: CreditNoteStatusEnum::SUCCEEDED,
         );
-
 
         $creditNote = ThrelsInvoicingModule::createCreditNote($creditNoteDto);
 
@@ -111,11 +108,9 @@ class ThrelsInvoicingModuleCommand extends Command
             items: collect($item),
         );
 
-
-        $creditNoteTransaction= ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
+        $creditNoteTransaction = ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
 
         ThrelsInvoicingModule::setCreditNoteTransaction($creditNoteTransaction);
-
 
         $creditNotePdfDto = new CreditNotePDFGenerationDto(
             name: 'CreditNote 1',
@@ -126,7 +121,6 @@ class ThrelsInvoicingModuleCommand extends Command
         );
 
         ThrelsInvoicingModule::generateCreditNotePdf($creditNote, $creditNotePdfDto);
-
 
         $this->comment('All done');
 

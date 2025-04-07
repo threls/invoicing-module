@@ -14,8 +14,5 @@ class SetCreditNoteTransactionDto extends Data
     public function __construct(
         public readonly CreditNote $creditNote,
         public readonly Transaction $transaction,
-    )
-    {
-    }
-
+    ) {}
 }

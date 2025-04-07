@@ -12,6 +12,7 @@ class CreateCreditNoteAction
     use SerialNumberFormatter;
 
     protected CreditNote $creditNote;
+
     protected CreateCreditNoteDto $createCreditNoteDto;
 
     public function execute(CreateCreditNoteDto $createCreditNoteDto)
@@ -23,7 +24,6 @@ class CreateCreditNoteAction
         return $this->creditNote;
 
     }
-
 
     public function createCreditNote()
     {

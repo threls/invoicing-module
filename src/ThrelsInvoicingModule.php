@@ -81,6 +81,4 @@ class ThrelsInvoicingModule
         app(GenerateCreditNotePDFAction::class)->execute($creditNote, $creditNotePDFGenerationDto);
 
     }
-
-
 }

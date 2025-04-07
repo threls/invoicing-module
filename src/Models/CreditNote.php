@@ -5,7 +5,6 @@ namespace Threls\ThrelsInvoicingModule\Models;
 use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\ModelStatus\HasStatuses;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;

@@ -5,7 +5,6 @@ namespace Threls\ThrelsInvoicingModule\Actions;
 use Threls\ThrelsInvoicingModule\Dto\CreditNotePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Jobs\CreditNotePDFGenerationJob;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
-use Threls\ThrelsInvoicingModule\Models\Invoice;
 
 class GenerateCreditNotePDFAction
 {
@@ -14,5 +13,4 @@ class GenerateCreditNotePDFAction
         CreditNotePDFGenerationJob::dispatch($creditNote, $creditNotePDFGenerationDto);
 
     }
-
 }

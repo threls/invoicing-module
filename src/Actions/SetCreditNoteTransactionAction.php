@@ -12,5 +12,4 @@ class SetCreditNoteTransactionAction
             ->update(['transaction_id', $setCreditNoteTransactionDto->transaction->id]);
 
     }
-
 }
