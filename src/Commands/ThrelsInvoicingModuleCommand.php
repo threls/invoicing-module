@@ -88,7 +88,6 @@ class ThrelsInvoicingModuleCommand extends Command
 
         $creditNote = ThrelsInvoicingModule::createCreditNote($creditNoteDto);
 
-
         $item = new CreateTransactionItemDto(
             modelType: CreditNote::class,
             modelId: $creditNote->id,

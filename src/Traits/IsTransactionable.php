@@ -2,7 +2,6 @@
 
 namespace Threls\ThrelsInvoicingModule\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
 
