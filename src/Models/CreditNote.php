@@ -5,17 +5,24 @@ namespace Threls\ThrelsInvoicingModule\Models;
 use Brick\Money\Money;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\ModelStatus\HasStatuses;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
+use Threls\ThrelsInvoicingModule\Traits\IsTransactionable;
 
 /**
  * @property Money|null $amount
  */
-class CreditNote extends Model
+class CreditNote extends Model implements HasMedia
 {
     use HasStatuses;
     use SoftDeletes;
+    use InteractsWithMedia;
+    use IsTransactionable;
 
     public const string MEDIA_CREDIT_NOTE = 'media_credit_note';
 
@@ -33,9 +40,10 @@ class CreditNote extends Model
         $this->addMediaCollection(self::MEDIA_CREDIT_NOTE)->singleFile();
     }
 
-    public function transaction(): BelongsTo
+
+    public function transaction(): Transaction
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->transactionItem->transaction;
     }
 
     public function invoice(): BelongsTo

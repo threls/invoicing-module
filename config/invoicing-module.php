@@ -48,9 +48,9 @@ return [
 
         /*
          * Supported tags {VALUE}, {SYMBOL}, {CODE}
-         * ex. 1.99 €
+         * ex. 1.99 €,  € 1.99
          */
-        'format' => '{VALUE} {SYMBOL}',
+        'format' => '{SYMBOL} {VALUE}',
     ],
 
     'template' => 'template-1',

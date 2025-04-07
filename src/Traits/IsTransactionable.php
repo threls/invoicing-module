@@ -3,12 +3,13 @@
 namespace Threls\ThrelsInvoicingModule\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
 
 trait IsTransactionable
 {
-    public function transactionItems(): MorphMany
+    public function transactionItem(): MorphOne
     {
-        return $this->morphMany(TransactionItem::class, 'model');
+        return $this->morphOne(TransactionItem::class, 'model');
     }
 }
