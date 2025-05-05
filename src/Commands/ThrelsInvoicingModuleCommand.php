@@ -67,7 +67,7 @@ class ThrelsInvoicingModuleCommand extends Command
         $invoice = ThrelsInvoicingModule::createInvoice($transaction, $invoiceDto);
 
         $pdfDto = new InvoicePDFGenerationDto(
-            name: 'Invoice',
+            name: 'Receipt',
             customerName: 'Sabina',
             customerAddress: 'Threls Ltd, Gozitano Village, Mgarr Road Xewkija',
             customerPhone: '+355692222332',

@@ -61,7 +61,7 @@
 
         .table {
             width: 100%;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
             color: #212529;
         }
 
@@ -111,7 +111,7 @@
         }
 
         body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
-            line-height: 1.1;
+            line-height: 1.0;
         }
 
         .party-header {
@@ -137,7 +137,7 @@
 <body>
 {{-- Header --}}
 @if(config('invoicing-module.logo') != '')
-    <img src="{{ config('invoicing-module.logo') }}" alt="logo" height="100">
+    <img src="{{ config('invoicing-module.logo') }}" alt="logo" width="150">
 @endif
 
 <table class="table mt-5">
