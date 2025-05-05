@@ -76,49 +76,49 @@ class ThrelsInvoicingModuleCommand extends Command
 
         ThrelsInvoicingModule::generateInvoicePdf($invoice, $pdfDto);
 
-//        /* credit note */
-//
-//        $creditNoteDto = new CreateCreditNoteDto(
-//            invoiceId: $invoice->id,
-//            amount: $invoice->total_amount->getMinorAmount()->toInt(),
-//            currency: $invoice->currency,
-//            reason: 'Refund requested',
-//            status: CreditNoteStatusEnum::SUCCEEDED,
-//        );
-//
-//        $creditNote = ThrelsInvoicingModule::createCreditNote($creditNoteDto);
-//
-//        $item = new CreateTransactionItemDto(
-//            modelType: CreditNote::class,
-//            modelId: $creditNote->id,
-//            description: 'Test credit note item',
-//            qty: 1,
-//            amount: $creditNote->amount->getMinorAmount()->toInt(),
-//            totalAmount: $creditNote->amount->getMinorAmount()->toInt(),
-//            currency: 'EUR',
-//            vatId: 1
-//        );
-//
-//        $creditNoteTransactionDto = new CreateTransactionDto(
-//            userId: 1,
-//            type: TransactionTypeEnum::CREDIT_NOTE,
-//            status: TransactionStatusEnum::PAID,
-//            amount: 1000,
-//            currency: 'EUR',
-//            items: collect($item),
-//        );
-//
-//        ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
-//
-//        $creditNotePdfDto = new CreditNotePDFGenerationDto(
-//            name: 'CreditNote 1',
-//            customerName: 'Customer 1',
-//            customerAddress: 'Customer Address 1',
-//            customerPhone: '+355692222332',
-//            customerEmail: 'sabina@threls.com',
-//        );
-//
-//        ThrelsInvoicingModule::generateCreditNotePdf($creditNote, $creditNotePdfDto);
+        //        /* credit note */
+        //
+        //        $creditNoteDto = new CreateCreditNoteDto(
+        //            invoiceId: $invoice->id,
+        //            amount: $invoice->total_amount->getMinorAmount()->toInt(),
+        //            currency: $invoice->currency,
+        //            reason: 'Refund requested',
+        //            status: CreditNoteStatusEnum::SUCCEEDED,
+        //        );
+        //
+        //        $creditNote = ThrelsInvoicingModule::createCreditNote($creditNoteDto);
+        //
+        //        $item = new CreateTransactionItemDto(
+        //            modelType: CreditNote::class,
+        //            modelId: $creditNote->id,
+        //            description: 'Test credit note item',
+        //            qty: 1,
+        //            amount: $creditNote->amount->getMinorAmount()->toInt(),
+        //            totalAmount: $creditNote->amount->getMinorAmount()->toInt(),
+        //            currency: 'EUR',
+        //            vatId: 1
+        //        );
+        //
+        //        $creditNoteTransactionDto = new CreateTransactionDto(
+        //            userId: 1,
+        //            type: TransactionTypeEnum::CREDIT_NOTE,
+        //            status: TransactionStatusEnum::PAID,
+        //            amount: 1000,
+        //            currency: 'EUR',
+        //            items: collect($item),
+        //        );
+        //
+        //        ThrelsInvoicingModule::createTransaction($creditNoteTransactionDto);
+        //
+        //        $creditNotePdfDto = new CreditNotePDFGenerationDto(
+        //            name: 'CreditNote 1',
+        //            customerName: 'Customer 1',
+        //            customerAddress: 'Customer Address 1',
+        //            customerPhone: '+355692222332',
+        //            customerEmail: 'sabina@threls.com',
+        //        );
+        //
+        //        ThrelsInvoicingModule::generateCreditNotePdf($creditNote, $creditNotePdfDto);
 
         $this->comment('All done');
 
