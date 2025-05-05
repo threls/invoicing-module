@@ -30,18 +30,18 @@ class ThrelsInvoicingModuleCommand extends Command
                 modelId: 1,
                 description: 'Adult Ticket',
                 qty: 1,
-                amount: 2200,
-                totalAmount: 2200,
+                amount: 1800,
+                totalAmount: 1800,
                 currency: 'EUR',
                 vatId: 1
             ),
             new CreateTransactionItemDto(
                 modelType: Invoice::class,
                 modelId: 2,
-                description: 'Child 3-14 Ticket',
+                description: 'Child 5-12 Ticket',
                 qty: 1,
-                amount: 1500,
-                totalAmount: 1500,
+                amount: 1000,
+                totalAmount: 1000,
                 currency: 'EUR',
                 vatId: 1
             ),
@@ -51,7 +51,7 @@ class ThrelsInvoicingModuleCommand extends Command
             userId: 1,
             type: TransactionTypeEnum::PURCHASE,
             status: TransactionStatusEnum::PAID,
-            amount: 3700,
+            amount: 2800,
             currency: 'EUR',
             items: collect($items),
         );

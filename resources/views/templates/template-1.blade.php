@@ -190,6 +190,12 @@
                 </p>
             @endif
 
+            @if($invoice->seller->phone)
+                <p class="seller-phone">
+                    {{ __('invoices::invoice.phone') }}: {{ $invoice->seller->phone }}
+                </p>
+            @endif
+
 
             <p class="seller-vat">
                 VAT No.: {{ config('invoicing-module.seller.attributes.vat_nr') }}
@@ -200,12 +206,6 @@
                 EXO No.: {{ config('invoicing-module.seller.attributes.exo_nr') }}
             </p>
 
-
-            @if($invoice->seller->phone)
-                <p class="seller-phone">
-                    {{ __('invoices::invoice.phone') }}: {{ $invoice->seller->phone }}
-                </p>
-            @endif
 
             @foreach($invoice->seller->custom_fields as $key => $value)
                 <p class="seller-custom-field">
@@ -268,9 +268,9 @@
         @if($invoice->hasItemDiscount)
             <th scope="col" class="text-right border-0">{{ __('invoices::invoice.discount') }}</th>
         @endif
-{{--        @if($invoice->hasItemTax)--}}
-            <th scope="col" class="text-right border-0">VAT %</th>
-{{--        @endif--}}
+        {{--        @if($invoice->hasItemTax)--}}
+        <th scope="col" class="text-right border-0">VAT %</th>
+        {{--        @endif--}}
         <th scope="col" class="text-right border-0 pr-0">{{ __('invoices::invoice.sub_total') }}</th>
     </tr>
     </thead>
@@ -297,11 +297,11 @@
                     {{ $invoice->formatCurrency($item->discount) }}
                 </td>
             @endif
-{{--            @if($invoice->hasItemTax)--}}
-                <td class="text-right">
-                    {{$item->tax_percentage}} %
-                </td>
-{{--            @endif--}}
+            {{--            @if($invoice->hasItemTax)--}}
+            <td class="text-right">
+                {{$item->tax_percentage}} %
+            </td>
+            {{--            @endif--}}
 
             <td class="text-right pr-0">
                 {{ $invoice->formatCurrency($item->sub_total_price) }}
@@ -310,13 +310,13 @@
     @endforeach
     {{-- Summary --}}
 
-        <tr>
-            <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-            <td class="text-right pl-0">Subtotal</td>
-            <td class="text-right pr-0">
-                {{ $invoice->formatCurrency($invoice->total_amount - $invoice->total_taxes) }}
-            </td>
-        </tr>
+    <tr>
+        <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
+        <td class="text-right pl-0">Subtotal</td>
+        <td class="text-right pr-0">
+            {{ $invoice->formatCurrency($invoice->total_amount - $invoice->total_taxes) }}
+        </td>
+    </tr>
 
     @if($invoice->hasItemOrInvoiceDiscount())
         <tr>
