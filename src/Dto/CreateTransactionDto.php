@@ -13,7 +13,7 @@ use Threls\ThrelsInvoicingModule\Enums\TransactionTypeEnum;
 class CreateTransactionDto extends Data
 {
     public function __construct(
-        public readonly int $userId,
+        public readonly ?int $userId,
         public readonly TransactionTypeEnum $type,
         public readonly TransactionStatusEnum $status,
         public readonly int $amount,
