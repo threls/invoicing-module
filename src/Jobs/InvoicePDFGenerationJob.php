@@ -93,8 +93,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
                 ->pricePerUnit($priceWithoutVat->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
                // ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100)
-                ->taxByPercent($vatRate)
-            ;
+                ->taxByPercent($vatRate);
         });
 
         $this->invoiceItems = $invoiceItems;
