@@ -93,8 +93,8 @@ class ThrelsInvoicingModuleCommand extends Command
             modelId: $creditNote->id,
             description: 'Test credit note item',
             qty: 1,
-            amount: $creditNote->amount,
-            totalAmount: $creditNote->amount,
+            amount: $creditNote->amount->getMinorAmount()->toInt(),
+            totalAmount: $creditNote->amount->getMinorAmount()->toInt(),
             currency: 'EUR',
             vatId: 1
         );
