@@ -15,6 +15,7 @@ use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
+use Threls\ThrelsInvoicingModule\Models\VatRate;
 
 class InvoicePDFGenerationJob implements ShouldQueue
 {
@@ -85,12 +86,15 @@ class InvoicePDFGenerationJob implements ShouldQueue
         $invoiceItems = [];
         $items->each(function (TransactionItem $transactionItem) use (&$invoiceItems) {
 
+            $vatRate = VatRate::findOrFail($transactionItem->vat_id)->rate;
             $priceWithoutVat = $transactionItem->total_amount->minus($transactionItem->vat_amount);
 
             $invoiceItems[] = InvoiceItem::make($transactionItem->description)
                 ->pricePerUnit($priceWithoutVat->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
-                ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100);
+               // ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100)
+                ->taxByPercent($vatRate)
+            ;
         });
 
         $this->invoiceItems = $invoiceItems;

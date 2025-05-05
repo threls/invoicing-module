@@ -61,13 +61,13 @@
 
         .table {
             width: 100%;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             color: #212529;
         }
 
         .table th,
         .table td {
-            padding: 0.75rem;
+            padding: 0.5rem;
             vertical-align: top;
         }
 
@@ -105,23 +105,29 @@
         .text-uppercase {
             text-transform: uppercase !important;
         }
+
         * {
             font-family: "DejaVu Sans";
         }
+
         body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
             line-height: 1.1;
         }
+
         .party-header {
-            font-size: 1.5rem;
+            font-size: 1rem;
             font-weight: 400;
         }
+
         .total-amount {
             font-size: 12px;
             font-weight: 700;
         }
+
         .border-0 {
             border: none !important;
         }
+
         .cool-gray {
             color: #6B7280;
         }
@@ -130,7 +136,7 @@
 
 <body>
 {{-- Header --}}
-@if($invoice->logo)
+@if(config('invoicing-module.logo') != '')
     <img src="{{ config('invoicing-module.logo') }}" alt="logo" height="100">
 @endif
 
@@ -143,8 +149,8 @@
             </h4>
         </td>
         <td class="border-0 pl-0">
-            <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p>
-            <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p>
+            <p>Receipt No. <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+            <p>Receipt Date : <strong>{{ $invoice->getDate() }}</strong></p>
         </td>
     </tr>
     </tbody>
@@ -184,17 +190,16 @@
                 </p>
             @endif
 
-            @if($invoice->seller->vat)
-                <p class="seller-vat">
-                    {{ __('invoices::invoice.vat') }}: {{ config('invoicing-module.seller.attributes.vat_nr') }}
-                </p>
-            @endif
 
-            @if($invoice->seller->vat)
-                <p class="seller-vat">
-                    EXO Nr.: {{ config('invoicing-module.seller.attributes.exo_nr') }}
-                </p>
-            @endif
+            <p class="seller-vat">
+                {{ __('invoices::invoice.vat') }}: {{ config('invoicing-module.seller.attributes.vat_nr') }}
+            </p>
+
+
+            <p class="seller-vat">
+                EXO Nr.: {{ config('invoicing-module.seller.attributes.exo_nr') }}
+            </p>
+
 
             @if($invoice->seller->phone)
                 <p class="seller-phone">
@@ -230,7 +235,7 @@
 
             @if($invoice->buyer->vat)
                 <p class="buyer-vat">
-                    {{ __('invoices::invoice.vat') }}: {{ $invoice->buyer->vat }}
+                    VAT : {{ $invoice->buyer->vat }}
                 </p>
             @endif
 
@@ -263,9 +268,9 @@
         @if($invoice->hasItemDiscount)
             <th scope="col" class="text-right border-0">{{ __('invoices::invoice.discount') }}</th>
         @endif
-        @if($invoice->hasItemTax)
-            <th scope="col" class="text-right border-0">{{ __('invoices::invoice.tax') }}</th>
-        @endif
+{{--        @if($invoice->hasItemTax)--}}
+            <th scope="col" class="text-right border-0">VAT %</th>
+{{--        @endif--}}
         <th scope="col" class="text-right border-0 pr-0">{{ __('invoices::invoice.sub_total') }}</th>
     </tr>
     </thead>
@@ -292,11 +297,11 @@
                     {{ $invoice->formatCurrency($item->discount) }}
                 </td>
             @endif
-            @if($invoice->hasItemTax)
+{{--            @if($invoice->hasItemTax)--}}
                 <td class="text-right">
-                    {{ $invoice->formatCurrency($item->tax) }}
+                    {{$item->tax_percentage}} %
                 </td>
-            @endif
+{{--            @endif--}}
 
             <td class="text-right pr-0">
                 {{ $invoice->formatCurrency($item->sub_total_price) }}
