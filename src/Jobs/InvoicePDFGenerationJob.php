@@ -122,7 +122,6 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->currencyThousandsSeparator(config('invoicing-module.currency.thousands_separator'))
             ->taxableAmount($this->invoice->total_amount->getMinorAmount()->toFloat() / 100)
             ->totalAmount($this->invoice->total_amount->getMinorAmount()->toFloat() / 100)
-            ->setCustomData()
             ->template('template-1');
 
         $this->invoicePDF = $invoicePDF;
