@@ -192,12 +192,12 @@
 
 
             <p class="seller-vat">
-                {{ __('invoices::invoice.vat') }}: {{ config('invoicing-module.seller.attributes.vat_nr') }}
+                VAT No.: {{ config('invoicing-module.seller.attributes.vat_nr') }}
             </p>
 
 
             <p class="seller-vat">
-                EXO Nr.: {{ config('invoicing-module.seller.attributes.exo_nr') }}
+                EXO No.: {{ config('invoicing-module.seller.attributes.exo_nr') }}
             </p>
 
 
@@ -309,6 +309,15 @@
         </tr>
     @endforeach
     {{-- Summary --}}
+
+        <tr>
+            <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
+            <td class="text-right pl-0">Subtotal</td>
+            <td class="text-right pr-0">
+                {{ $invoice->formatCurrency($invoice->total_amount - $invoice->total_taxes) }}
+            </td>
+        </tr>
+
     @if($invoice->hasItemOrInvoiceDiscount())
         <tr>
             <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
@@ -339,7 +348,7 @@
     @if($invoice->hasItemOrInvoiceTax())
         <tr>
             <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-            <td class="text-right pl-0">{{ __('invoices::invoice.total_taxes') }}</td>
+            <td class="text-right pl-0">Total VAT</td>
             <td class="text-right pr-0">
                 {{ $invoice->formatCurrency($invoice->total_taxes) }}
             </td>
