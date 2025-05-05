@@ -32,7 +32,7 @@ class CreateInvoiceAction
 
     protected function checkTransactionStatus()
     {
-        if (! $this->transaction->status != TransactionStatusEnum::PAID->value) {
+        if ($this->transaction->status != TransactionStatusEnum::PAID->value) {
             throw new BadRequestHttpException('Transaction status is not paid.');
         }
 

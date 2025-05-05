@@ -50,7 +50,7 @@ class ThrelsInvoicingModuleCommand extends Command
         $dto = new CreateTransactionDto(
             userId: 1,
             type: TransactionTypeEnum::PURCHASE,
-            status: TransactionStatusEnum::PENDING,
+            status: TransactionStatusEnum::PAID,
             amount: 1000,
             currency: 'EUR',
             items: collect($items),
