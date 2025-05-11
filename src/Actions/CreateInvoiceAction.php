@@ -48,22 +48,7 @@ class CreateInvoiceAction
             'currency' => $this->createInvoiceDto->currency,
         ]);
 
-        $this->invoice->update([
-            'invoice_number' => $this->createInvoiceNumber(),
-        ]);
-
         return $this;
 
-    }
-
-    protected function createInvoiceNumber(): string
-    {
-        $this->series(config('invoicing-module.serial_number.series'));
-        $this->sequence($this->invoice->id);
-        $this->sequencePadding(config('invoicing-module.serial_number.sequence_padding'));
-        $this->delimiter(config('invoicing-module.serial_number.delimiter'));
-        $this->serialNumberFormat(config('invoicing-module.serial_number.format'));
-
-        return $this->getSerialNumber();
     }
 }
