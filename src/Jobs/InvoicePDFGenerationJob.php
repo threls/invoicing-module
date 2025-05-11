@@ -92,7 +92,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
             $invoiceItems[] = InvoiceItem::make($transactionItem->description)
                 ->pricePerUnit($priceWithoutVat->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
-               // ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100)
+                ->subTotalPrice($transactionItem->total_amount->getMinorAmount()->toFloat() / 100)
+                // ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100)
                 ->taxByPercent($vatRate);
         });
 
@@ -104,6 +105,9 @@ class InvoicePDFGenerationJob implements ShouldQueue
     protected function createInvoice()
     {
         $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
+            ->setCustomData([
+                'total_taxes' => $this->invoice->vat_amount->getMinorAmount()->toFloat() / 100
+            ])
             ->series(config('invoicing-module.serial_number.series'))
             ->sequence($this->invoice->id)
             ->sequencePadding(0)

@@ -174,7 +174,7 @@
         <td class="px-0">
             @if($invoice->seller->name)
                 <p class="seller-name">
-                    <strong>{{ $invoice->seller->name }}</strong>
+                    <strong>{!! $invoice->seller->name !!}</strong>
                 </p>
             @endif
 
@@ -314,7 +314,7 @@
         <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
         <td class="text-right pl-0">Subtotal</td>
         <td class="text-right pr-0">
-            {{ $invoice->formatCurrency($invoice->total_amount - $invoice->total_taxes) }}
+            {{ $invoice->formatCurrency($invoice->total_amount - $invoice->getCustomData()['total_taxes']) }}
         </td>
     </tr>
 
@@ -350,7 +350,7 @@
             <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
             <td class="text-right pl-0">Total VAT</td>
             <td class="text-right pr-0">
-                {{ $invoice->formatCurrency($invoice->total_taxes) }}
+                {{ $invoice->formatCurrency($invoice->getCustomData()['total_taxes']) }}
             </td>
         </tr>
     @endif
