@@ -106,7 +106,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
     {
         $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
             ->setCustomData([
-                'total_taxes' => $this->invoice->vat_amount->getMinorAmount()->toFloat() / 100
+                'total_taxes' => $this->invoice->vat_amount->getMinorAmount()->toFloat() / 100,
             ])
             ->series(config('invoicing-module.serial_number.series'))
             ->sequence($this->invoice->id)
