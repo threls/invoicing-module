@@ -149,7 +149,7 @@
             </h4>
         </td>
         <td class="border-0 pl-0">
-            <p>Receipt No. <strong>{{ $invoice->getSerialNumber() }}</strong></p>
+            <p>Receipt No. <strong>{{ $invoice->sequence }}</strong></p>
             <p>Receipt Date : <strong>{{ $invoice->getDate() }}</strong></p>
         </td>
     </tr>
