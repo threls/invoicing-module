@@ -39,25 +39,6 @@ return [
     ],
     'logo' => '',
 
-    'serial_number' => [
-
-        /*
-         * ex. AA
-         */
-        'series' => '',
-
-        /*
-         *  ex. 00001
-         */
-        'sequence_padding' => 0,
-        'delimiter' => '',
-
-        /*
-         * ex. AA-00001
-         */
-        'format' => '{SERIES}{DELIMITER}{SEQUENCE}',
-    ],
-
     'currency' => [
         'code' => 'EUR',
 
