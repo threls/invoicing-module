@@ -104,7 +104,10 @@ class InvoicePDFGenerationJob implements ShouldQueue
     protected function createInvoice()
     {
         $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
+            ->series(config('invoicing-module.serial_number.series'))
             ->sequence($this->invoice->id)
+            ->sequencePadding(0)
+            ->delimiter('')
             ->seller($this->seller)
             ->buyer($this->customer)
             ->date(Carbon::parse($this->invoice->created_at))
