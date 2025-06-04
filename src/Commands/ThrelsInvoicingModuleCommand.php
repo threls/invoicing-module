@@ -26,7 +26,7 @@ class ThrelsInvoicingModuleCommand extends Command
     {
         $items = [
             new CreateTransactionItemDto(
-                modelType: Invoice::class,
+                modelType: 'App\Models\Ticket',
                 modelId: 1,
                 description: 'Adult Ticket',
                 qty: 1,
@@ -38,7 +38,7 @@ class ThrelsInvoicingModuleCommand extends Command
             new CreateTransactionItemDto(
                 modelType: Invoice::class,
                 modelId: 2,
-                description: 'Child 5-12 Ticket',
+                description: 'App\Models\Ticket',
                 qty: 1,
                 amount: 1000,
                 totalAmount: 1000,
@@ -49,6 +49,8 @@ class ThrelsInvoicingModuleCommand extends Command
 
         $dto = new CreateTransactionDto(
             userId: 1,
+            modelType: 'App\Models\Booking',
+            modelId: 2,
             type: TransactionTypeEnum::PURCHASE,
             status: TransactionStatusEnum::PAID,
             amount: 2800,

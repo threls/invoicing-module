@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\ModelStatus\HasStatuses;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
@@ -50,5 +51,10 @@ class Transaction extends Model
     public function payment(): MorphOne
     {
         return $this->morphOne(TransactionPayment::class, 'paymentable');
+    }
+
+    public function model(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

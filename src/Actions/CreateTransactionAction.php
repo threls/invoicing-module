@@ -32,6 +32,8 @@ class CreateTransactionAction
     {
         $this->transaction = Transaction::create([
             'user_id' => $this->createTransactionDto->userId,
+            'model_type' => $this->createTransactionDto->modelType,
+            'model_id' => $this->createTransactionDto->modelId,
             'amount' => $this->createTransactionDto->amount,
             'currency' => $this->createTransactionDto->currency,
             'type' => $this->createTransactionDto->type,

@@ -14,6 +14,8 @@ class CreateTransactionDto extends Data
 {
     public function __construct(
         public readonly ?int $userId,
+        public readonly ?string $modelType,
+        public readonly ?int $modelId,
         public readonly TransactionTypeEnum $type,
         public readonly TransactionStatusEnum $status,
         public readonly int $amount,
