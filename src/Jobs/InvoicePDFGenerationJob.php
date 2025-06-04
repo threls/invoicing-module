@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
+use Threls\ThrelsInvoicingModule\Events\InvoiceCreatedEvent;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
@@ -47,7 +48,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
             ->setCustomer()
             ->setItems()
             ->createInvoice()
-            ->addMediaToDisk();
+            ->addMediaToDisk()
+            ->dispatchCreationEvent();
 
     }
 
@@ -104,7 +106,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected function createInvoice()
     {
-        $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Invoice')
+        $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Receipt')
             ->setCustomData([
                 'total_taxes' => $this->invoice->vat_amount->getMinorAmount()->toFloat() / 100,
             ])
@@ -131,9 +133,15 @@ class InvoicePDFGenerationJob implements ShouldQueue
         return $this;
     }
 
-    protected function addMediaToDisk(): void
+    protected function addMediaToDisk(): self
     {
         $this->invoice->addMediaFromStream($this->invoicePDF->stream())->usingFileName($this->invoicePDF->filename)->toMediaCollection(Invoice::MEDIA_INVOICE);
 
+        return $this;
+    }
+
+    protected function dispatchCreationEvent(): void
+    {
+        InvoiceCreatedEvent::dispatch($this->invoice);
     }
 }
