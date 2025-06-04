@@ -9,7 +9,5 @@ class InvoiceCreatedEvent
 {
     use Dispatchable;
 
-    public function __construct( Invoice $invoice)
-    {
-    }
+    public function __construct(Invoice $invoice) {}
 }
