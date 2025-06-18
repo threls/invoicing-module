@@ -15,11 +15,15 @@ class MoneyCast implements CastsAttributes
             return null;
         }
 
-        return Money::ofMinor($value, $attributes['currency'] ?? 'EUR');
+        return Money::ofMinor($value, $attributes[$key.'_currency'] ?? 'EUR');
     }
 
-    public function set(Model $model, string $key, mixed $value, array $attributes): int
+    public function set(Model $model, string $key, mixed $value, array $attributes): ?int
     {
+        if ($value === null) {
+            return null;
+        }
+
         if ($value instanceof Money) {
             return $value->getMinorAmount()->toInt();
         }

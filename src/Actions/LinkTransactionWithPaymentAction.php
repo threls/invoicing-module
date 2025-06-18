@@ -4,15 +4,19 @@ namespace Threls\ThrelsInvoicingModule\Actions;
 
 use Threls\ThrelsInvoicingModule\Dto\LinkTransactionWithPaymentDto;
 use Threls\ThrelsInvoicingModule\Models\Transaction;
+use Threls\ThrelsInvoicingModule\Models\TransactionPayment;
 
 class LinkTransactionWithPaymentAction
 {
     public function execute(LinkTransactionWithPaymentDto $updateTransactionPaymentDto): void
     {
-        Transaction::find($updateTransactionPaymentDto->transactionId)->payment()->create([
-            'paymentable_id' => $updateTransactionPaymentDto->paymentableId,
-            'paymentable_type' => $updateTransactionPaymentDto->paymentableType,
-        ]);
+        TransactionPayment::create(
+            [
+                'transaction_id' => $updateTransactionPaymentDto->transactionId,
+                'paymentable_id' => $updateTransactionPaymentDto->paymentableId,
+                'paymentable_type' => $updateTransactionPaymentDto->paymentableType,
+            ]
+        );
 
     }
 }
