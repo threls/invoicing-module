@@ -3,7 +3,6 @@
 namespace Threls\ThrelsInvoicingModule\Actions;
 
 use Threls\ThrelsInvoicingModule\Dto\LinkTransactionWithPaymentDto;
-use Threls\ThrelsInvoicingModule\Models\Transaction;
 use Threls\ThrelsInvoicingModule\Models\TransactionPayment;
 
 class LinkTransactionWithPaymentAction
