@@ -2,10 +2,11 @@
 
 namespace Threls\ThrelsInvoicingModule\Events;
 
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Foundation\Events\Dispatchable;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 
-class InvoiceCreatedEvent
+class InvoiceCreatedEvent implements ShouldDispatchAfterCommit
 {
     use Dispatchable;
 
