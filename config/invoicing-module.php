@@ -50,4 +50,13 @@ return [
             ],
         ],
     ],
+
+    'models' => [
+        'creditNote' => \Threls\ThrelsInvoicingModule\Models\CreditNote::class,
+        'invoice' => \Threls\ThrelsInvoicingModule\Models\Invoice::class,
+        'pdfInvoice' => \Threls\ThrelsInvoicingModule\Models\PDFInvoice::class,
+        'transaction' => \Threls\ThrelsInvoicingModule\Models\Transaction::class,
+        'transactionItem' => \Threls\ThrelsInvoicingModule\Models\TransactionItem::class,
+        'transactionPayment' => \Threls\ThrelsInvoicingModule\Models\TransactionPayment::class,
+    ],
 ];

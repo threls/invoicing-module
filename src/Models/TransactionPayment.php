@@ -3,6 +3,7 @@
 namespace Threls\ThrelsInvoicingModule\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Threls\ThrelsInvoicingModule\InvoicingModelResolverManager;
 
 class TransactionPayment extends Model
 {
@@ -12,7 +13,7 @@ class TransactionPayment extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(InvoicingModelResolverManager::getModelClass('transaction'));
     }
 
     public function paymentable()

@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\ModelStatus\HasStatuses;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
+use Threls\ThrelsInvoicingModule\InvoicingModelResolverManager;
 use Threls\ThrelsInvoicingModule\Traits\IsTransactionable;
 
 /**
@@ -45,6 +46,6 @@ class CreditNote extends Model implements HasMedia
 
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Invoice::class, 'invoice_id', 'id');
+        return $this->belongsTo(InvoicingModelResolverManager::getModelClass('invoice'), 'invoice_id', 'id');
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
+use Threls\ThrelsInvoicingModule\InvoicingModelResolverManager;
 
 /**
  * @property Money|null $total_amount
@@ -33,7 +34,7 @@ class Invoice extends Model implements HasMedia
 
     public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(InvoicingModelResolverManager::getModelClass('transaction'));
     }
 
     public function registerMediaCollections(): void
@@ -43,6 +44,6 @@ class Invoice extends Model implements HasMedia
 
     public function creditNote(): HasOne
     {
-        return $this->hasOne(CreditNote::class, 'invoice_id', 'id');
+        return $this->hasOne(InvoicingModelResolverManager::getModelClass('creditNote'), 'invoice_id', 'id');
     }
 }

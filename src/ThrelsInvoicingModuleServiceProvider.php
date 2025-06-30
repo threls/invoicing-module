@@ -2,6 +2,7 @@
 
 namespace Threls\ThrelsInvoicingModule;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\ModelStatus\ModelStatusServiceProvider;
@@ -31,5 +32,15 @@ class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
             ->hasCommand(ThrelsInvoicingModuleCommand::class)
             ->publishesServiceProvider(ModelStatusServiceProvider::class);
 
+    }
+
+    public function packageRegistered()
+    {
+        InvoicingModelResolverManager::resolveModels();
+    }
+
+    public function packageBooted()
+    {
+        Relation::morphMap(config('invoicing-module.models', InvoicingModelResolverManager::$defaultModels));
     }
 }

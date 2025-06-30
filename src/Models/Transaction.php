@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\ModelStatus\HasStatuses;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
 use Threls\ThrelsInvoicingModule\Enums\TransactionTypeEnum;
+use Threls\ThrelsInvoicingModule\InvoicingModelResolverManager;
 
 /**
  * @property Money|null $amount
@@ -35,22 +36,22 @@ class Transaction extends Model
 
     public function transactionItems(): HasMany
     {
-        return $this->hasMany(TransactionItem::class);
+        return $this->hasMany(InvoicingModelResolverManager::getModelClass('transactionItem'));
     }
 
     public function invoice(): HasOne
     {
-        return $this->hasOne(Invoice::class);
+        return $this->hasOne(InvoicingModelResolverManager::getModelClass('invoice'));
     }
 
     public function creditNote(): HasOne
     {
-        return $this->hasOne(CreditNote::class);
+        return $this->hasOne(InvoicingModelResolverManager::getModelClass('creditNote'));
     }
 
     public function payment(): MorphOne
     {
-        return $this->morphOne(TransactionPayment::class, 'paymentable');
+        return $this->morphOne(InvoicingModelResolverManager::getModelClass('transactionPayment'), 'paymentable');
     }
 
     public function model(): MorphTo

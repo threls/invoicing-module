@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Threls\ThrelsInvoicingModule\Casts\MoneyCast;
+use Threls\ThrelsInvoicingModule\InvoicingModelResolverManager;
 
 /**
  * @property Money|null $amount
@@ -31,7 +32,7 @@ class TransactionItem extends Model
 
     public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo(InvoicingModelResolverManager::getModelClass('transaction'));
     }
 
     public function model(): MorphTo
