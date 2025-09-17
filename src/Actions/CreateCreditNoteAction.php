@@ -36,24 +36,9 @@ class CreateCreditNoteAction
             'reason' => $this->createCreditNoteDto->reason,
         ]);
 
-        $this->creditNote->update([
-            'credit_note_number' => $this->createCreditNoteNumber(),
-        ]);
-
         $this->creditNote->setStatus($this->createCreditNoteDto->status->value, $this->createCreditNoteDto->statusReason);
 
         return $this;
 
-    }
-
-    protected function createCreditNoteNumber(): string
-    {
-        $this->series(config('invoicing-module.serial_number.series'));
-        $this->sequence($this->creditNote->id);
-        $this->sequencePadding(config('invoicing-module.serial_number.sequence_padding'));
-        $this->delimiter(config('invoicing-module.serial_number.delimiter'));
-        $this->serialNumberFormat(config('invoicing-module.serial_number.format'));
-
-        return $this->getSerialNumber();
     }
 }

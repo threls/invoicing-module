@@ -15,6 +15,7 @@ use Threls\ThrelsInvoicingModule\Dto\CreditNotePDFGenerationDto;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
+use Threls\ThrelsInvoicingModule\Models\VatRate;
 
 class CreditNotePDFGenerationJob implements ShouldQueue
 {
@@ -72,6 +73,7 @@ class CreditNotePDFGenerationJob implements ShouldQueue
             'address' => $this->creditNotePDFGenerationDto->customerAddress,
             'email' => $this->creditNotePDFGenerationDto->customerEmail,
             'phone' => $this->creditNotePDFGenerationDto->customerPhone,
+            'vat' => $this->creditNotePDFGenerationDto->customerVAT,
         ]);
 
         return $this;
@@ -85,12 +87,15 @@ class CreditNotePDFGenerationJob implements ShouldQueue
         $invoiceItems = [];
         $items->each(function (TransactionItem $transactionItem) use (&$invoiceItems) {
 
+            $vatRate = VatRate::findOrFail($transactionItem->vat_id)->rate;
             $priceWithoutVat = $transactionItem->total_amount->minus($transactionItem->vat_amount);
 
             $invoiceItems[] = InvoiceItem::make($transactionItem->description)
                 ->pricePerUnit($priceWithoutVat->getMinorAmount()->toFloat() / 100)
                 ->quantity($transactionItem->qty)
-                ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100);
+                ->subTotalPrice($transactionItem->total_amount->getMinorAmount()->toFloat() / 100)
+                // ->tax($transactionItem->vat_amount->getMinorAmount()->toFloat() / 100)
+                ->taxByPercent($vatRate);
         });
 
         $this->invoiceItems = $invoiceItems;
@@ -98,14 +103,17 @@ class CreditNotePDFGenerationJob implements ShouldQueue
         return $this;
     }
 
+
     protected function createInvoice()
     {
         $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Credit Note')
+            ->setCustomData([
+                'total_taxes' => $this->creditNote->vat_amount->getMinorAmount()->toFloat() / 100,
+            ])
             ->series(config('invoicing-module.serial_number.series'))
             ->sequence($this->creditNote->id)
-            ->sequencePadding(config('invoicing-module.serial_number.sequence_padding'))
-            ->delimiter(config('invoicing-module.serial_number.delimiter'))
-            ->serialNumberFormat(config('invoicing-module.serial_number.format'))
+            ->sequencePadding(0)
+            ->delimiter('')
             ->seller($this->seller)
             ->buyer($this->customer)
             ->date(Carbon::parse($this->creditNote->created_at))

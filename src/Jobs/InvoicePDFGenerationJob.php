@@ -75,6 +75,7 @@ class InvoicePDFGenerationJob implements ShouldQueue
             'address' => $this->invoicePDFGenerationData->customerAddress,
             'email' => $this->invoicePDFGenerationData->customerEmail,
             'phone' => $this->invoicePDFGenerationData->customerPhone,
+            'vat' => $this->invoicePDFGenerationData->customerVAT,
         ]);
 
         return $this;

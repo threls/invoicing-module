@@ -15,5 +15,6 @@ class InvoicePDFGenerationDto extends Data
         public ?string $customerAddress,
         public ?string $customerPhone,
         public ?string $customerEmail,
+        public ?string $customerVAT,
     ) {}
 }
