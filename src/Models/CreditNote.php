@@ -15,6 +15,7 @@ use Threls\ThrelsInvoicingModule\Traits\IsTransactionable;
 
 /**
  * @property Money|null $amount
+ * @property Money|null $vat_amount
  */
 class CreditNote extends Model implements HasMedia
 {
@@ -31,6 +32,7 @@ class CreditNote extends Model implements HasMedia
     {
         return [
             'amount' => MoneyCast::class,
+            'vat_amount' => MoneyCast::class,
         ];
     }
 

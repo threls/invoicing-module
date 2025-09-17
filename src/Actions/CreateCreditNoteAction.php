@@ -32,6 +32,7 @@ class CreateCreditNoteAction
 
         $this->creditNote = $invoice->creditNote()->create([
             'amount' => $this->createCreditNoteDto->amount,
+            'vat_amount' => $this->createCreditNoteDto->vatAmount,
             'currency' => $this->createCreditNoteDto->currency,
             'reason' => $this->createCreditNoteDto->reason,
         ]);
