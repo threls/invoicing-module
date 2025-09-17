@@ -28,6 +28,7 @@ class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
                 'create_invoices_table',
                 'create_credit_notes_table',
                 'create_transaction_payments_table',
+                'add_vat_amount_on_credit_notes_table'
             ])
             ->hasCommand(ThrelsInvoicingModuleCommand::class)
             ->publishesServiceProvider(ModelStatusServiceProvider::class);
