@@ -103,7 +103,6 @@ class CreditNotePDFGenerationJob implements ShouldQueue
         return $this;
     }
 
-
     protected function createInvoice()
     {
         $invoicePDF = PDFInvoice::make($this->invoicePDFGenerationData->name ?? 'Credit Note')
