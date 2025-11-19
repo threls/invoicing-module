@@ -124,7 +124,7 @@ class CreditNotePDFGenerationJob implements ShouldQueue
             ->currencyDecimalPoint(config('invoicing-module.currency.decimal_point'))
             ->currencyFormat(config('invoicing-module.currency.format'))
             ->currencyThousandsSeparator(config('invoicing-module.currency.thousands_separator'))
-            ->totalAmount($this->creditNote->total_amount->getMinorAmount()->toFloat() / 100)
+            ->totalAmount($this->creditNote->amount->getMinorAmount()->negated()->toFloat() / 100)
             ->template('template-1');
 
         $this->invoicePDF = $invoicePDF;

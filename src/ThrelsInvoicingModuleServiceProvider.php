@@ -39,9 +39,4 @@ class ThrelsInvoicingModuleServiceProvider extends PackageServiceProvider
     {
         InvoicingModelResolverManager::resolveModels();
     }
-
-    public function packageBooted()
-    {
-        Relation::morphMap(config('invoicing-module.models', InvoicingModelResolverManager::$defaultModels));
-    }
 }
