@@ -12,7 +12,9 @@ use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use Threls\ThrelsInvoicingModule\Dto\CreditNotePDFGenerationDto;
+use Threls\ThrelsInvoicingModule\Enums\GeneratedPdfStatusEnum;
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
+use Threls\ThrelsInvoicingModule\Models\GeneratedPdf;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
 use Threls\ThrelsInvoicingModule\Models\VatRate;
@@ -25,6 +27,8 @@ class CreditNotePDFGenerationJob implements ShouldQueue
 
     protected CreditNotePDFGenerationDto $creditNotePDFGenerationDto;
 
+    protected GeneratedPdf $generatedPdf;
+
     protected Party $seller;
 
     protected Party $customer;
@@ -33,22 +37,31 @@ class CreditNotePDFGenerationJob implements ShouldQueue
 
     protected PDFInvoice $invoicePDF;
 
-    public function __construct(CreditNote $creditNote, CreditNotePDFGenerationDto $creditNotePDFGenerationDto)
+    public function __construct(CreditNote $creditNote, CreditNotePDFGenerationDto $creditNotePDFGenerationDto, GeneratedPdf $generatedPdf)
     {
         $this->creditNote = $creditNote;
         $this->creditNotePDFGenerationDto = $creditNotePDFGenerationDto;
-
+        $this->generatedPdf = $generatedPdf;
     }
 
     public function handle(): void
     {
-        $this
-            ->setSeller()
-            ->setCustomer()
-            ->setItems()
-            ->createInvoice()
-            ->addMediaToDisk();
+        $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::IN_PROGRESS]);
 
+        try {
+            $this
+                ->setSeller()
+                ->setCustomer()
+                ->setItems()
+                ->createInvoice()
+                ->addMediaToDisk();
+
+            $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::SUCCEEDED]);
+        } catch (\Throwable $e) {
+            $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::FAILED]);
+
+            throw $e;
+        }
     }
 
     protected function setSeller()
