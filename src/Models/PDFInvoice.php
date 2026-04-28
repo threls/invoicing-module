@@ -4,8 +4,9 @@ namespace Threls\ThrelsInvoicingModule\Models;
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\View;
+use LaravelDaily\Invoices\Invoice;
 
-class PDFInvoice extends \LaravelDaily\Invoices\Invoice
+class PDFInvoice extends Invoice
 {
     public function render()
     {

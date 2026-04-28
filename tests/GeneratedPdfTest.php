@@ -24,15 +24,30 @@ uses(RefreshDatabase::class);
 
 class TestableInvoicePDFGenerationJob extends InvoicePDFGenerationJob
 {
-    protected function setSeller(): static { return $this; }
+    protected function setSeller(): static
+    {
+        return $this;
+    }
 
-    protected function setCustomer(): static { return $this; }
+    protected function setCustomer(): static
+    {
+        return $this;
+    }
 
-    protected function setItems(): static { return $this; }
+    protected function setItems(): static
+    {
+        return $this;
+    }
 
-    protected function createInvoice(): static { return $this; }
+    protected function createInvoice(): static
+    {
+        return $this;
+    }
 
-    protected function addMediaToDisk(): static { return $this; }
+    protected function addMediaToDisk(): static
+    {
+        return $this;
+    }
 
     protected function dispatchCreationEvent(): void {}
 }
@@ -41,19 +56,31 @@ class FailingInvoicePDFGenerationJob extends InvoicePDFGenerationJob
 {
     protected function setSeller(): static
     {
-        throw new \RuntimeException('Simulated PDF generation failure');
+        throw new RuntimeException('Simulated PDF generation failure');
     }
 }
 
 class TestableCreditNotePDFGenerationJob extends CreditNotePDFGenerationJob
 {
-    protected function setSeller(): static { return $this; }
+    protected function setSeller(): static
+    {
+        return $this;
+    }
 
-    protected function setCustomer(): static { return $this; }
+    protected function setCustomer(): static
+    {
+        return $this;
+    }
 
-    protected function setItems(): static { return $this; }
+    protected function setItems(): static
+    {
+        return $this;
+    }
 
-    protected function createInvoice(): static { return $this; }
+    protected function createInvoice(): static
+    {
+        return $this;
+    }
 
     protected function addMediaToDisk(): void {}
 }
@@ -62,7 +89,7 @@ class FailingCreditNotePDFGenerationJob extends CreditNotePDFGenerationJob
 {
     protected function setSeller(): static
     {
-        throw new \RuntimeException('Simulated credit note PDF failure');
+        throw new RuntimeException('Simulated credit note PDF failure');
     }
 }
 
@@ -73,16 +100,16 @@ class FailingCreditNotePDFGenerationJob extends CreditNotePDFGenerationJob
 function createInvoice(): Invoice
 {
     $transaction = Transaction::create([
-        'amount'   => 10000,
+        'amount' => 10000,
         'currency' => 'EUR',
-        'type'     => TransactionTypeEnum::PURCHASE,
+        'type' => TransactionTypeEnum::PURCHASE,
     ]);
 
     return Invoice::create([
         'transaction_id' => $transaction->id,
-        'vat_amount'     => 0,
-        'total_amount'   => 10000,
-        'currency'       => 'EUR',
+        'vat_amount' => 0,
+        'total_amount' => 10000,
+        'currency' => 'EUR',
     ]);
 }
 
@@ -92,8 +119,8 @@ function createCreditNote(): CreditNote
 
     return CreditNote::create([
         'invoice_id' => $invoice->id,
-        'amount'     => 10000,
-        'currency'   => 'EUR',
+        'amount' => 10000,
+        'currency' => 'EUR',
     ]);
 }
 
@@ -159,7 +186,7 @@ it('transitions invoice pdf status to succeeded when the job completes successfu
     $generatedPdf = GeneratedPdf::create(['status' => GeneratedPdfStatusEnum::PENDING]);
 
     $job = new TestableInvoicePDFGenerationJob(
-        new Invoice(),
+        new Invoice,
         new InvoicePDFGenerationDto(null, null, null, null, null, null),
         $generatedPdf,
     );
@@ -173,12 +200,12 @@ it('sets invoice pdf status to failed when the job throws an exception', functio
     $generatedPdf = GeneratedPdf::create(['status' => GeneratedPdfStatusEnum::PENDING]);
 
     $job = new FailingInvoicePDFGenerationJob(
-        new Invoice(),
+        new Invoice,
         new InvoicePDFGenerationDto(null, null, null, null, null, null),
         $generatedPdf,
     );
 
-    expect(fn () => $job->handle())->toThrow(\RuntimeException::class, 'Simulated PDF generation failure');
+    expect(fn () => $job->handle())->toThrow(RuntimeException::class, 'Simulated PDF generation failure');
     expect($generatedPdf->fresh()->status)->toBe(GeneratedPdfStatusEnum::FAILED);
 });
 
@@ -186,7 +213,7 @@ it('transitions credit note pdf status to succeeded when the job completes succe
     $generatedPdf = GeneratedPdf::create(['status' => GeneratedPdfStatusEnum::PENDING]);
 
     $job = new TestableCreditNotePDFGenerationJob(
-        new CreditNote(),
+        new CreditNote,
         new CreditNotePDFGenerationDto(null, null, null, null, null, null),
         $generatedPdf,
     );
@@ -200,11 +227,11 @@ it('sets credit note pdf status to failed when the job throws an exception', fun
     $generatedPdf = GeneratedPdf::create(['status' => GeneratedPdfStatusEnum::PENDING]);
 
     $job = new FailingCreditNotePDFGenerationJob(
-        new CreditNote(),
+        new CreditNote,
         new CreditNotePDFGenerationDto(null, null, null, null, null, null),
         $generatedPdf,
     );
 
-    expect(fn () => $job->handle())->toThrow(\RuntimeException::class, 'Simulated credit note PDF failure');
+    expect(fn () => $job->handle())->toThrow(RuntimeException::class, 'Simulated credit note PDF failure');
     expect($generatedPdf->fresh()->status)->toBe(GeneratedPdfStatusEnum::FAILED);
 });

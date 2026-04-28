@@ -1,5 +1,12 @@
 <?php
 
+use Threls\ThrelsInvoicingModule\Models\CreditNote;
+use Threls\ThrelsInvoicingModule\Models\Invoice;
+use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
+use Threls\ThrelsInvoicingModule\Models\Transaction;
+use Threls\ThrelsInvoicingModule\Models\TransactionItem;
+use Threls\ThrelsInvoicingModule\Models\TransactionPayment;
+
 return [
 
     'date' => [
@@ -52,11 +59,11 @@ return [
     ],
 
     'models' => [
-        'creditNote' => \Threls\ThrelsInvoicingModule\Models\CreditNote::class,
-        'invoice' => \Threls\ThrelsInvoicingModule\Models\Invoice::class,
-        'pdfInvoice' => \Threls\ThrelsInvoicingModule\Models\PDFInvoice::class,
-        'transaction' => \Threls\ThrelsInvoicingModule\Models\Transaction::class,
-        'transactionItem' => \Threls\ThrelsInvoicingModule\Models\TransactionItem::class,
-        'transactionPayment' => \Threls\ThrelsInvoicingModule\Models\TransactionPayment::class,
+        'creditNote' => CreditNote::class,
+        'invoice' => Invoice::class,
+        'pdfInvoice' => PDFInvoice::class,
+        'transaction' => Transaction::class,
+        'transactionItem' => TransactionItem::class,
+        'transactionPayment' => TransactionPayment::class,
     ],
 ];
