@@ -12,7 +12,9 @@ use Illuminate\Support\Collection;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use Threls\ThrelsInvoicingModule\Dto\InvoicePDFGenerationDto;
+use Threls\ThrelsInvoicingModule\Enums\GeneratedPdfStatusEnum;
 use Threls\ThrelsInvoicingModule\Events\InvoiceCreatedEvent;
+use Threls\ThrelsInvoicingModule\Models\GeneratedPdf;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
 use Threls\ThrelsInvoicingModule\Models\TransactionItem;
@@ -26,6 +28,8 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected InvoicePDFGenerationDto $invoicePDFGenerationData;
 
+    protected GeneratedPdf $generatedPdf;
+
     protected Party $seller;
 
     protected Party $customer;
@@ -34,23 +38,32 @@ class InvoicePDFGenerationJob implements ShouldQueue
 
     protected PDFInvoice $invoicePDF;
 
-    public function __construct(Invoice $invoice, InvoicePDFGenerationDto $invoicePDFGenerationData)
+    public function __construct(Invoice $invoice, InvoicePDFGenerationDto $invoicePDFGenerationData, GeneratedPdf $generatedPdf)
     {
         $this->invoice = $invoice;
         $this->invoicePDFGenerationData = $invoicePDFGenerationData;
-
+        $this->generatedPdf = $generatedPdf;
     }
 
     public function handle(): void
     {
-        $this
-            ->setSeller()
-            ->setCustomer()
-            ->setItems()
-            ->createInvoice()
-            ->addMediaToDisk()
-            ->dispatchCreationEvent();
+        $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::IN_PROGRESS]);
 
+        try {
+            $this
+                ->setSeller()
+                ->setCustomer()
+                ->setItems()
+                ->createInvoice()
+                ->addMediaToDisk()
+                ->dispatchCreationEvent();
+
+            $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::SUCCEEDED]);
+        } catch (\Throwable $e) {
+            $this->generatedPdf->update(['status' => GeneratedPdfStatusEnum::FAILED]);
+
+            throw $e;
+        }
     }
 
     protected function setSeller()

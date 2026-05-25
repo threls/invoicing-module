@@ -65,7 +65,7 @@ class ThrelsInvoicingModule
 
     public function generateInvoicePdf(Invoice $invoice, InvoicePDFGenerationDto $invoicePdfGenerationDto): void
     {
-        app(GenerateInvoicePdfAction::class)->execute($invoice, $invoicePdfGenerationDto);
+        app(GenerateInvoicePDFAction::class)->execute($invoice, $invoicePdfGenerationDto);
 
     }
 
