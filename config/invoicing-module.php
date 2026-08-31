@@ -1,5 +1,7 @@
 <?php
 
+// Published from threls/invoicing-module.
+
 use Threls\ThrelsInvoicingModule\Models\CreditNote;
 use Threls\ThrelsInvoicingModule\Models\Invoice;
 use Threls\ThrelsInvoicingModule\Models\PDFInvoice;
